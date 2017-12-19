@@ -32,7 +32,9 @@ wsServer = new WebSocketServer({
 app.listen(port, function () {
     console.log('Express listening on port '+port+'!')
 })
-
+app.get('/',function(req,res){
+    res.sendFile('public/index.html');
+});
 var routes = require('./api/routes/ardiunoDataRoutes'); //importing route
 routes(app); //register the route
 
