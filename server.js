@@ -16,8 +16,14 @@ mongoose.connect('mongodb://localhost:27017');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
-app.use(express.static('public'))
+// app.use(cors());
+app.use(express.static('public'));
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+  
 var clients = [];
 var server = http.createServer(function (req, res) {
 }) 
@@ -29,7 +35,7 @@ server.listen(WebSocketPort, function () {
 wsServer = new WebSocketServer({
     httpServer: server
 })
-
+ 
 app.listen(port, function () {
     console.log('Express listening on port '+port+'!')
 })

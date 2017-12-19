@@ -47,7 +47,7 @@
 </head>
 
 <body>
-    <div id="content"><p>lama</p><p>hueheugheughdasgsa</p></div>
+    <div id="content"></div>
     <div>
         <span id="status">Connected</span>
         <input type="text" id="input">
@@ -55,7 +55,7 @@
     
     <script>
         window.WebSocket = window.WebSocket || window.MozWebSocket;
-         var connection = new WebSocket("ws://127.0.0.1:1337");
+         var connection = new WebSocket("ws://pkprojectserver.hopto.org:1337");
          
          connection.onopen = function () {
              console.log('open');
