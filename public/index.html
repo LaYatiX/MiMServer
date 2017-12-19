@@ -1,82 +1,208 @@
-<html><head>
-    <meta charset="utf-8">
-    <title>WebSockets Test</title>
-    <style>
-        * {
-            font-family: tahoma;
-            font-size: 12px;
-            padding: 0px;
-            margin: 0px;
-        }
+<!DOCTYPE html>
+<html lang="en-GB">
 
-        p {
-            line-height: 18px;
-        }
-
-        div {
-            width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #content {
-            padding: 5px;
-            background: #ddd;
-            border-radius: 5px;
-            overflow-y: scroll;
-            border: 1px solid #CCC;
-            margin-top: 10px;
-            height: 160px;
-        }
-
-        #input {
-            border-radius: 2px;
-            border: 1px solid #ccc;
-            margin-top: 10px;
-            padding: 5px;
-            width: 400px;
-        }
-
-        #status {
-            width: 88px;
-            display: block;
-            float: left;
-            margin-top: 15px;
-        }
-    </style>
+<head>
+  <meta charset="utf-8">
+  <title>Analyser</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="jquery-3.2.1.min.js"></script>
 </head>
 
-<body>
-    <div id="content"><p>lama</p><p>hueheugheughdasgsa</p></div>
-    <div>
-        <span id="status">Connected</span>
-        <input type="text" id="input">
+<body onload="init()">
+        
+    <input type="text" id="data" value="10;50;60;30;60;50"/>
+    <button onclick="sendData();">Wyślij dane pomiarowe</button>
+
+    <button onclick="getData();">Pobierz dane pomiarowe</button>
+    <button onclick="getLatestData();">Pobierz ostatnie pomiarowe</button>
+    <div id="content">
+
     </div>
+  <div class="grid">
+
+    <div class ="container" id="v1-box">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v1">
+        <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+        <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+        <g transform="rotate(90, 50, 50)" class="bar-text">
+            <text x="50" y="50" class="bar-number">
+            </text>
+            <text x="50" y="50" class="bar-label">
+              Volts
+            </text>
+          </g>
+      </svg>
+    </div>
+
+    <div class ="container" id="v2-box">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v2">
+        <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+        <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+      </svg>
+    </div>
+
+    <div class ="container" id="v3-box">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v3">
+        <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+        <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+      </svg>
+    </div>
+
+    <div class ="container" id="c1-box">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c1">
+        <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+        <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+      </svg>
+     </div>
+  
+    <div class ="container" id="c2-box">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c2">
+        <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+        <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+      </svg>
+     </div>
+  
+    <div class ="container" id="c3-box">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c3">
+        <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+        <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+      </svg>
+     </div>
+
+     <!--
+       
+      <input type="text" class="data" value="10;50;60;30;60;50"/>
+      <button onclick="sendData();">Wy�lij dane pomiarowe</button>
+      <button onclick="getData();">Pobierz dane pomiarowe</button>
+      <button onclick="getLatestData();">Pobierz ostatnie pomiarowe</button>
+      <div class="content"></div>
+
+      -->
+  </body>
+  
+ </div>
+
+ <script>
+
+$('#percent').on('change', function(){
+  var val = parseInt($(this).val());
+  var $circle = $('#svg #bar');
+  
+  if (isNaN(val)) {
+   val = 100; 
+  }
+  else{
+    var r = $circle.attr('r');
+    var c = Math.PI*(r*2);
+   
+    if (value < -250) { value = 0;}
+    if (value > 250) { value = 250;}
     
-    <script>
-        window.WebSocket = window.WebSocket || window.MozWebSocket;
-         var connection = new WebSocket("ws://127.0.0.1:1337");
-         
-         connection.onopen = function () {
-             console.log('open');
-             document.getElementById('status').innerHTML = "Connected";
-         }
-         var input = document.getElementById("input");
-         input.onkeydown = function (e) {
-             if(e.keyCode == 13) { //enter
-                var msg = input.value;
-                if(!msg) return;
-                connection.send(msg);
-                input.value = "";
-             }
-         }
-         var content = document.getElementById("content");
-         connection.onmessage = function (msg) {
-             var p = document.createElement("p");
-             p.appendChild(document.createTextNode(msg.data));
-            content.appendChild(p);
-         }
-    </script>
+    var pct = ((250-val)/250)*c;
+    
+    $circle.css({ strokeDashoffset: pct});
+    
+    $('#cont').attr('data-pct',val);
+  }
+});
+
+$().on('change', function(){
+    var value = parseFloat($(this).val());
+    var $circle = $();
+    
+    if (isNaN(value)) {
+      value = 0; 
+    }
+    else{
+     
+      if (value < -250) { value = 0;}
+      if (value > 250) { value = 250;}
+            
+      $progressbar.css({ strokeDashoffset: value}); // to fix
+    }
+  });
+
+function init() { 
+    data = document.getElementById("data").value;
+    getLatestData();
+}
+function  sendData() {
+    data = document.getElementById("data").value;
+    if(data.split(";").length==6) {
+        console.log(data);
+        $.ajax({
+            type: "POST", 
+            url: "http://pkprojectserver.hopto.org:8080/api/send/index.php",
+            data: {"data": data},
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            }, 
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+    else{
+        alert("Data Corrupted!");
+    }
+}
+function  getData() {
+    $.ajax({
+        type: "GET",
+        url: "http://pkprojectserver.hopto.org:8080/api/getall",
+        success: function (response) {
+            console.log(response);
+            // document.getElementByclass("content").innerHTML = response;
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+function  getLatestData() {
+    setInterval(function(){
+        $.ajax({
+            type: "GET", 
+            url: "http://pkprojectserver.hopto.org:8080/api/getlatest",
+            dataType: "text",
+            success: function (response) {
+                console.log(response);
+                // document.getElementByClassNma("content").innerHTML = response;
+                var outputArray = response.split(";");
+
+                for (let i = 0; i < outputArray.length; i++) {
+                    var value = +outputArray[i];
+                    var $circle = $('.progress');
+                    var $box = $('.bar-number');
+                    
+                    if (isNaN(value)) { 
+                    value = 255;  
+                    } 
+                    else{
+                        var r = $circle.eq(i).attr('r');
+                        var c = Math.PI*(r*2);
+                    
+                        if (value < -250) { value = 0;}
+                        if (value > 250) { value = 250;}
+                        
+                        var pct = ((250-value)/250)*c;
+                        
+                        $circle.eq(i).css({ strokeDashoffset: pct});
+                        $box.eq(i).html(outputArray[i]);
+                    }  
+                }
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }, 500);
+}
+</script>
 
 
-</body></html>
+</body>
+
+</html>

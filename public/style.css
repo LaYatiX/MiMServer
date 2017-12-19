@@ -1,0 +1,139 @@
+body {
+	width: 100%;
+  height:100%;
+	font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  background: #212121;
+  color: #c4c4c4;
+}
+
+.rounded-bar {
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height:100%;  
+  transform-origin: center;
+  transform: rotate(-90deg);
+  stroke-dasharray: 250;
+}
+
+.backdrop {
+  stroke-width: 7;
+  stroke: #333;
+}
+
+.progress {
+  stroke-width: 7;
+  stroke: rgb(50, 73, 160);
+  stroke-dashoffset: 125;
+  transition: all 300ms ease-in-out;
+}
+
+#v1 > .progress {
+  stroke-dashoffset: 40;
+}
+
+#v2 > .progress {
+  stroke-dashoffset: 80;
+}
+
+#v3 > .progress {
+  stroke-dashoffset: 120;
+}
+
+#c1 > .progress {
+  stroke-dashoffset: 140;
+}
+
+#c2 > .progress {
+  stroke-dashoffset: 160;
+}
+
+#c3 > .progress {
+  stroke-dashoffset: 200;
+}
+
+.bar-text {
+  /*font: 16px/1.4em "Montserrat", Arial, sans-serif;
+  transform-origin: center;
+  -moz-transform: translateY(0.25em);
+  -ms-transform: translateY(0.25em);
+  transform: translateY(0.25em);
+  -webkit-transform: translateY(0.25em);
+  */
+  fill: #fff;
+}
+
+.bar-number {
+  font-size: 0.7em;
+  line-height: 1;
+  text-anchor: middle;
+  -moz-transform: translateY(-0.25em);
+  -ms-transform: translateY(-0.25em);
+  -webkit-transform: translateY(-0.25em);
+  transform: translateY(-0.25em);
+}
+
+.bar-label {
+  font-size: 0.5em;
+  text-anchor: middle;
+  -moz-transform: translateY(0.7em);
+  -ms-transform: translateY(0.7em);
+  -webkit-transform: translateY(0.7em);
+  transform: translateY(0.7em);
+}
+
+
+@media screen and (min-width: 736px)
+{
+  .grid {
+    display: grid;
+    grid-template-columns: 3fr repeat(3, 2fr) 3fr;
+    grid-template-rows: minmax(10%, 1fr) repeat(2, 1fr) minmax(10%, 1fr);
+    grid-template-areas:
+    ". . . . ."
+    ". v1 v2 v3 ."
+    ". c1 c2 c3 ."
+    ". . . . .";
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transform-origin: center;
+    transform: translate(-50%, -50%);
+    transition: all 300ms ease-in-out;
+  }
+
+  #v1-box
+  {
+    grid-area: v1
+  }
+
+  #v2-box
+  {
+    grid-area: v2
+  }
+
+  #v3-box
+  {
+    grid-area: v3
+  }
+
+  #c1-box
+  {
+    grid-area: c1
+  }
+
+  #c2-box
+  {
+    grid-area: c2
+  }
+
+  #c3-box
+  {
+    grid-area: c3
+  }
+}

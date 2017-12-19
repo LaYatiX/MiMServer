@@ -11,6 +11,4 @@ app.route('/api/getall')
 
 app.route('/api/getlatest')
     .get(arduino.read_last_measurement)
-app.route('/')
-    .res.sendFile('../../public/index.html')
 };  
