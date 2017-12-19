@@ -1,7 +1,7 @@
 var WebSocketServer = require('websocket').server;
 var net = require('net');
 var mysql = require('mysql');
-var cors = require('cors')
+var cors = require('cors');
 var http = require('http');
 var express = require('express'),
     app = express(),
@@ -23,7 +23,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
-  
+
 var clients = [];
 var server = http.createServer(function (req, res) {
 }) 
