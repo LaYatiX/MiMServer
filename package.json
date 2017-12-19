@@ -1,0 +1,29 @@
+{
+  "name": "mimserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.7",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.13.3",
+    "websocket": "^1.0.25"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LaYatiX/MiMServer.git"
+  },
+  "author": "Grzegorz Piwosz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LaYatiX/MiMServer/issues"
+  },
+  "homepage": "https://github.com/LaYatiX/MiMServer#readme"
+}
