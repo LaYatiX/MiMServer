@@ -1,14 +1,14 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-  Measurement = mongoose.model('Data');
+  Task = mongoose.model('Data');
 
 exports.read_all_measurements = function(req, res) {
-  Measurement.find({ }, {data: 1, _id:0}, function(err, measurement) {
+  Task.find({ }, {data: 1, _id:0}, function(err, task) {
     if (err)
       res.send(err);
       var array = [];
-      measurement.forEach(element => {
+      task.forEach(element => {
         array.push(element.data);
       });
     res.json(array); 
@@ -16,41 +16,43 @@ exports.read_all_measurements = function(req, res) {
 };
 
 
+
+
 exports.create_measurement = function(req, res) {
-  var new_measurement = new Measurement(req.body);
-  console.log(req.body);
-  
-  new_measurement.save(function(err, measurement) {
+  var new_task = new Task(req.body);
+  new_task.save(function(err, task) {
     if (err)
       res.send(err);
-    res.json(measurement); 
-  }); 
+    res.json(task); 
+  });
 };
+
  
 exports.read_last_measurement = function(req, res) {
-  Measurement.findOne({}, {data: 1, _id:0}, { sort: { 'Created_date' : -1 } }, function(err, measurement) {
+  Task.findOne({}, {data: 1, _id:0}, { sort: { 'Created_date' : -1 } }, function(err, task) {
     if (err)
-      res.send(err);
-    if(measurement)
-      res.send(measurement.data);
-    else
-    res.send("Database is empty");
+      res.send(err)
+    res.json(task.data);
   });
 };
 
-// exports.update_a_measurement = function(req, res) {
-//   Measurement.findOneAndUpdate({_id: req.params.measurementId}, req.body, {new: true}, function(err, measurement) {
+// exports.update_a_task = function(req, res) {
+//   Task.findOneAndUpdate({_id: req.params.taskId}, req.body, {new: true}, function(err, task) {
 //     if (err)
 //       res.send(err);
-//     res.json(measurement);
+//     res.json(task);
 //   });
-// // };
+// };
 
 
-exports.delete_all = function(req, res) {
-  Measurement.remove({}, function(err, measurement) {
-    if (err)
-      res.send(err);
-    res.json({ message: 'All measurement successfully deleted' });
-  });
-}; 
+// exports.delete_a_task = function(req, res) {
+
+
+//   Task.remove({
+//     _id: req.params.taskId
+//   }, function(err, task) {
+//     if (err)
+//       res.send(err);
+//     res.json({ message: 'Task successfully deleted' });
+//   });
+// };

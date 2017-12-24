@@ -19,7 +19,7 @@ function  sendData() {
         console.log(data);
         $.ajax({
             type: "POST", 
-            url: "http://pkprojectserver.hopto.org:8080/api/send",
+            url: "http://pkprojectserver.hopto.org:8080/api/send/index.php",
             data: {"data": data},
             dataType: "json",
             success: function (response) {
