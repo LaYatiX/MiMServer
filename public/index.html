@@ -2,206 +2,160 @@
 <html lang="en-GB">
 
 <head>
-  <meta charset="utf-8">
-  <title>Analyser</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
-  <script src="jquery-3.2.1.min.js"></script>
+    <meta charset="utf-8">
+    <title>Analyser</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="jquery-3.2.1.min.js"></script>
 </head>
 
-<body onload="init()">
-        
-    <input type="text" id="data" value="10;50;60;30;60;50"/>
-    <button onclick="sendData();">Wyślij dane pomiarowe</button>
+<body onload="init();">
 
-    <button onclick="getData();">Pobierz dane pomiarowe</button>
-    <button onclick="getLatestData();">Pobierz ostatnie pomiarowe</button>
-    <div id="content">
+    <div class="grid">
 
-    </div>
-  <div class="grid">
+        <div class ="container" id="v1-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v1">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <g transform="rotate(90, 50, 50)" class="bar-text">
+                <text x="50" y="50" class="bar-number">
+                </text>
+                <text x="50" y="50" class="bar-label">
+                Volts
+                </text>
+                </g>
+        </svg>
+        </div>
 
-    <div class ="container" id="v1-box">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v1">
-        <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
-        <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
-        <g transform="rotate(90, 50, 50)" class="bar-text">
-            <text x="50" y="50" class="bar-number">
-            </text>
-            <text x="50" y="50" class="bar-label">
-              Volts
-            </text>
-          </g>
-      </svg>
-    </div>
+        <div class ="container" id="v2-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v2">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <g transform="rotate(90, 50, 50)" class="bar-text">
+                <text x="50" y="50" class="bar-number">
+                </text>
+                <text x="50" y="50" class="bar-label">
+                    Volts
+                </text>
+                </g>
+            </svg>
+        </div>
 
-    <div class ="container" id="v2-box">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v2">
-        <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
-        <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
-      </svg>
-    </div>
+        <div class ="container" id="v3-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v3">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <g transform="rotate(90, 50, 50)" class="bar-text">
+                <text x="50" y="50" class="bar-number">
+                </text>
+                <text x="50" y="50" class="bar-label">
+                    Volts
+                </text>
+                </g>
+            </svg>
+        </div>
 
-    <div class ="container" id="v3-box">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v3">
-        <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
-        <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
-      </svg>
-    </div>
-
-    <div class ="container" id="c1-box">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c1">
-        <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
-        <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
-      </svg>
-     </div>
-  
-    <div class ="container" id="c2-box">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c2">
-        <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
-        <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
-      </svg>
-     </div>
-  
-    <div class ="container" id="c3-box">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c3">
-        <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
-        <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
-      </svg>
-     </div>
-
-     <!--
-       
-      <input type="text" class="data" value="10;50;60;30;60;50"/>
-      <button onclick="sendData();">Wy�lij dane pomiarowe</button>
-      <button onclick="getData();">Pobierz dane pomiarowe</button>
-      <button onclick="getLatestData();">Pobierz ostatnie pomiarowe</button>
-      <div class="content"></div>
-
-      -->
-  </body>
-  
- </div>
-
- <script>
-
-$('#percent').on('change', function(){
-  var val = parseInt($(this).val());
-  var $circle = $('#svg #bar');
-  
-  if (isNaN(val)) {
-   val = 100; 
-  }
-  else{
-    var r = $circle.attr('r');
-    var c = Math.PI*(r*2);
-   
-    if (value < -250) { value = 0;}
-    if (value > 250) { value = 250;}
+        <div class ="container" id="c1-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c1">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <g transform="rotate(90, 50, 50)" class="bar-text">
+                <text x="50" y="50" class="bar-number">
+                </text>
+                <text x="50" y="50" class="bar-label">
+                    Amperes
+                </text>
+                </g>
+            </svg>
+        </div>
     
-    var pct = ((250-val)/250)*c;
+        <div class ="container" id="c2-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c2">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <g transform="rotate(90, 50, 50)" class="bar-text">
+                <text x="50" y="50" class="bar-number">
+                </text>
+                <text x="50" y="50" class="bar-label">
+                    Amperes
+                </text>
+                </g>
+            </svg>
+        </div>
     
-    $circle.css({ strokeDashoffset: pct});
-    
-    $('#cont').attr('data-pct',val);
-  }
-});
+        <div class ="container" id="c3-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c3">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <g transform="rotate(90, 50, 50)" class="bar-text">
+                <text x="50" y="50" class="bar-number">
+                </text>
+                <text x="50" y="50" class="bar-label">
+                    Amperes
+                </text>
+                </g>
+            </svg>
+        </div>
+  
+    </div>
 
-$().on('change', function(){
-    var value = parseFloat($(this).val());
-    var $circle = $();
-    
-    if (isNaN(value)) {
-      value = 0; 
-    }
-    else{
-     
-      if (value < -250) { value = 0;}
-      if (value > 250) { value = 250;}
-            
-      $progressbar.css({ strokeDashoffset: value}); // to fix
-    }
-  });
+    <script>
 
-function init() { 
-    data = document.getElementById("data").value;
-    getLatestData();
-}
-function  sendData() {
-    data = document.getElementById("data").value;
-    if(data.split(";").length==6) {
-        console.log(data);
-        $.ajax({
-            type: "POST", 
-            url: "http://pkprojectserver.hopto.org:8080/api/send/",
-            data: {"data": data},
-            dataType: "json",
-            success: function (response) {
-                console.log(response);
-            }, 
-            error: function (err) {
-                console.log(err);
-            }
-        });
+    function init() {
+        getData();
     }
-    else{
-        alert("Data Corrupted!");
-    }
-}
-function  getData() {
-    $.ajax({
-        type: "GET",
-        url: "http://pkprojectserver.hopto.org:8080/api/getall",
-        success: function (response) {
-            console.log(response);
-            // document.getElementByclass("content").innerHTML = response;
-        },
-        error: function (err) {
-            console.log(err);
+
+    function getData() {
+        window.WebSocket = window.WebSocket || window.MozWebSocket;
+        var connection = new WebSocket("ws://pkprojectserver.hopto.org:1337");
+
+        connection.onopen = function () {
+            console.log('WebSocket Status: OPEN');
         }
-    });
-}
-function  getLatestData() {
-    setInterval(function(){
-        $.ajax({
-            type: "GET", 
-            url: "http://pkprojectserver.hopto.org:8080/api/getlatest",
-            dataType: "text",
-            success: function (response) {
-                console.log(response);
-                // document.getElementByClassNma("content").innerHTML = response;
-                var outputArray = response.split(";");
 
-                for (let i = 0; i < outputArray.length; i++) {
-                    var value = +outputArray[i];
-                    var $circle = $('.progress');
-                    var $box = $('.bar-number');
-                    
-                    if (isNaN(value)) { 
-                    value = 255;  
-                    } 
-                    else{
-                        var r = $circle.eq(i).attr('r');
-                        var c = Math.PI*(r*2);
-                    
-                        if (value < -250) { value = 0;}
-                        if (value > 250) { value = 250;}
-                        
-                        var pct = ((250-value)/250)*c;
-                        
-                        $circle.eq(i).css({ strokeDashoffset: pct});
-                        $box.eq(i).html(outputArray[i]);
-                    }  
+        connection.onmessage = function(message) {
+            var outputArray = message.data.split(";");
+
+            updateContent(outputArray);
+        }
+
+        setInterval(function() {
+            var outputArray = Array.from({length: 6}, () => Math.floor(Math.random() * 130 + 30));
+
+            updateContent(outputArray);
+        }, 600);
+    }
+
+    function updateContent(outputArray) {
+        for (let sentinel = 0; sentinel < outputArray.length; ++sentinel) {
+            var value = +outputArray[sentinel];
+            var $circle = $('.progress');
+            
+            if (isNaN(value)) {
+                value = 250;
+            }
+            else {
+                var radius = $circle.eq(sentinel).attr('r');
+                var circumference = Math.PI * (radius * 2);
+            
+                if (value < -250) {
+                    value = 0;
                 }
 
-            },
-            error: function (err) {
-                console.log(err);
+                if (value > 250) {
+                    value = 250;
+                }
+                
+                var fillingValue = ((250 - value) / 250) * circumference;
+                
+                $circle.eq(sentinel).css({
+                    strokeDashoffset: fillingValue
+                });
+                $('.bar-number').eq(sentinel).html(parseInt(value));
             }
-        });
-    }, 500);
-}
-</script>
+        }
+    }
 
+    </script>
 
 </body>
 

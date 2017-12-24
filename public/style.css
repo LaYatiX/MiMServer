@@ -1,7 +1,7 @@
 body {
-	width: 100%;
-  height:100%;
-	font-family: 'Open Sans', sans-serif;
+  width: 100%;
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   background: #212121;
   color: #c4c4c4;
@@ -11,7 +11,7 @@ body {
   left: 50%;
   top: 50%;
   width: 100%;
-  height:100%;  
+  height: 100%;
   transform-origin: center;
   transform: rotate(-90deg);
   stroke-dasharray: 250;
@@ -26,7 +26,7 @@ body {
   stroke-width: 7;
   stroke: rgb(50, 73, 160);
   stroke-dashoffset: 125;
-  transition: all 300ms ease-in-out;
+  transition: stroke-dashoffset 300ms cubic-bezier(.88,.23,.26,.84);
 }
 
 #v1 > .progress {
@@ -54,35 +54,27 @@ body {
 }
 
 .bar-text {
-  /*font: 16px/1.4em "Montserrat", Arial, sans-serif;
-  transform-origin: center;
-  -moz-transform: translateY(0.25em);
-  -ms-transform: translateY(0.25em);
-  transform: translateY(0.25em);
-  -webkit-transform: translateY(0.25em);
-  */
-  fill: #fff;
+  fill: #f0f0f0;
 }
 
 .bar-number {
-  font-size: 0.7em;
+  font-size: 0.85em;
   line-height: 1;
   text-anchor: middle;
-  -moz-transform: translateY(-0.25em);
-  -ms-transform: translateY(-0.25em);
-  -webkit-transform: translateY(-0.25em);
-  transform: translateY(-0.25em);
+  -moz-transform: translateY(-0.12em);
+  -ms-transform: translateY(-0.12em);
+  -webkit-transform: translateY(-0.12em);
+  transform: translateY(-0.12em);
 }
 
 .bar-label {
   font-size: 0.5em;
   text-anchor: middle;
-  -moz-transform: translateY(0.7em);
-  -ms-transform: translateY(0.7em);
-  -webkit-transform: translateY(0.7em);
-  transform: translateY(0.7em);
+  -moz-transform: translateY(0.95em);
+  -ms-transform: translateY(0.95em);
+  -webkit-transform: translateY(0.95em);
+  transform: translateY(0.95em);
 }
-
 
 @media screen and (min-width: 736px)
 {
@@ -101,39 +93,31 @@ body {
     top: 50%;
     width: 100%;
     height: 100%;
-    z-index: -1;
     transform-origin: center;
     transform: translate(-50%, -50%);
-    transition: all 300ms ease-in-out;
   }
 
-  #v1-box
-  {
+  #v1-box {
     grid-area: v1
   }
 
-  #v2-box
-  {
+  #v2-box {
     grid-area: v2
   }
 
-  #v3-box
-  {
+  #v3-box {
     grid-area: v3
   }
 
-  #c1-box
-  {
+  #c1-box {
     grid-area: c1
   }
 
-  #c2-box
-  {
+  #c2-box {
     grid-area: c2
   }
 
-  #c3-box
-  {
+  #c3-box {
     grid-area: c3
   }
 }
