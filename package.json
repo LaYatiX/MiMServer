@@ -9,6 +9,7 @@
     "mongoose": "^4.13.7",
     "mysql": "^2.15.0",
     "nodemon": "^1.13.3",
+    "thunkify": "^2.1.2",
     "websocket": "^1.0.25"
   },
   "devDependencies": {},

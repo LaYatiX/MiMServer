@@ -10,12 +10,10 @@ exports.read_all_measurements = function(req, res) {
       var array = [];
       task.forEach(element => {
         array.push(element.data);
-      });
+      }); 
     res.json(array); 
   });
 };
-
-
 
 
 exports.create_measurement = function(req, res) {
@@ -36,6 +34,14 @@ exports.read_last_measurement = function(req, res) {
   });
 };
 
+exports.delete_all = function(req, res) {
+  Measurement.remove({}, function(err, measurement) {
+    if (err)
+      res.send(err);
+    res.json({ message: 'All measurement successfully deleted' });
+  });
+}; 
+
 // exports.update_a_task = function(req, res) {
 //   Task.findOneAndUpdate({_id: req.params.taskId}, req.body, {new: true}, function(err, task) {
 //     if (err)
@@ -46,8 +52,6 @@ exports.read_last_measurement = function(req, res) {
 
 
 // exports.delete_a_task = function(req, res) {
-
-
 //   Task.remove({
 //     _id: req.params.taskId
 //   }, function(err, task) {
