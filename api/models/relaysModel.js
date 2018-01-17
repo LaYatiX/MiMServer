@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
   
 
-var CommutatorsSchema = new Schema({ 
+var relaysSchema = new Schema({ 
   data: {
     type: String,
     required: 'Kindly enter the name of the task'
@@ -15,4 +15,4 @@ var CommutatorsSchema = new Schema({
   }
 });
  
-module.exports = mongoose.model('CommutatorsStatesHistory', CommutatorsSchema);  
+module.exports = mongoose.model('relaysStatesHistory', relaysSchema);  

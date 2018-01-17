@@ -18,27 +18,28 @@ exports.read_all_measurements = function(req, res) {
 
 exports.create_measurement = function(req, res) {
   var new_task = new Task(req.body);
-  new_task.save(function(err, task) {
+  new_task.save(function(err) {
     if (err)
       res.send(err);
-    res.json(task); 
   });
 };
 
  
 exports.read_last_measurement = function(req, res) {
   Task.findOne({}, {data: 1, _id:0}, { sort: { 'Created_date' : -1 } }, function(err, task) {
-    if (err)
-      res.send(err)
-    res.json(task.data);
+    if (err || !task)
+      res.send("Error, no data available")
+    else
+      res.send(task.data);
   });
 };
 
 exports.delete_all = function(req, res) {
-  Measurement.remove({}, function(err, measurement) {
+  Task.remove({}, function(err, measurement) {
     if (err)
       res.send(err);
-    res.json({ message: 'All measurement successfully deleted' });
+    else
+      res.json({ message: 'All measurement successfully deleted' });
   });
 }; 
 

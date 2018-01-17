@@ -1,5 +1,5 @@
 require('./api/models/ardiunoDataModel');
-require('./api/models/commutatorsModel');
+require('./api/models/relaysModel');
 require('./api/controllers/WebSocketController'); //importing server
 var net = require('net');
 var mysql = require('mysql');
@@ -26,9 +26,9 @@ app.listen(port, function () {
 })
 app.get('/',function(req,res){
     res.sendFile('/index.html');
-});
+}); 
 
 var routes = require('./api/routes/ardiunoDataRoutes'); //importing route
 routes(app); //register the route
-routes = require('./api/routes/commutatorsRoutes'); //importing route
+routes = require('./api/routes/relaysRoutes'); //importing route
 routes(app); //register the route
