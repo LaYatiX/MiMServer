@@ -3,365 +3,334 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Analyser - M&amp;M</title>
+    <title>Analyser</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script src="jquery-3.2.1.min.js"></script>
-    <script src="d3.v4.min.js"></script>
-    <link rel="shortcut icon" href="icon.png" />
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v0.4.min.js"></script>
 </head>
 
-<body onload="init()">
+<body onload="init();">
 
     <div class="grid">
 
-        <div class="container" id="v1-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="rounded-bar" id="v1">
-                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none" />
-                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none" />
+        <div class ="container" id="v1-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v1">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
                 <g transform="rotate(90, 50, 50)" class="bar-text">
-                    <text x="50" y="50" class="bar-number">
-                    </text>
-                    <text x="50" y="50" class="bar-label">
-                        Volts
-                    </text>
+                <text x="50" y="50" class="bar-number">
+                </text>
+                <text x="50" y="50" class="bar-label">
+                Volts
+                </text>
+                </g>
+        </svg>
+        </div>
+
+        <div class ="container" id="v2-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v2">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <g transform="rotate(90, 50, 50)" class="bar-text">
+                <text x="50" y="50" class="bar-number">
+                </text>
+                <text x="50" y="50" class="bar-label">
+                    Volts
+                </text>
                 </g>
             </svg>
         </div>
 
-        <div class="container" id="v2-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="rounded-bar" id="v2">
-                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none" />
-                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none" />
+        <div class ="container" id="v3-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v3">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
                 <g transform="rotate(90, 50, 50)" class="bar-text">
-                    <text x="50" y="50" class="bar-number">
-                    </text>
-                    <text x="50" y="50" class="bar-label">
-                        Volts
-                    </text>
+                <text x="50" y="50" class="bar-number">
+                </text>
+                <text x="50" y="50" class="bar-label">
+                    Volts
+                </text>
                 </g>
             </svg>
         </div>
 
-        <div class="container" id="v3-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="rounded-bar" id="v3">
-                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none" />
-                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none" />
+        <div class ="container" id="c1-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c1">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
                 <g transform="rotate(90, 50, 50)" class="bar-text">
-                    <text x="50" y="50" class="bar-number">
-                    </text>
-                    <text x="50" y="50" class="bar-label">
-                        Volts
-                    </text>
+                <text x="50" y="50" class="bar-number">
+                </text>
+                <text x="50" y="50" class="bar-label">
+                    Amperes
+                </text>
                 </g>
             </svg>
         </div>
-
-        <div class="container" id="c1-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="rounded-bar" id="c1">
-                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none" />
-                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none" />
+    
+        <div class ="container" id="c2-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c2">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
                 <g transform="rotate(90, 50, 50)" class="bar-text">
-                    <text x="50" y="50" class="bar-number">
-                    </text>
-                    <text x="50" y="50" class="bar-label">
-                        Amperes
-                    </text>
+                <text x="50" y="50" class="bar-number">
+                </text>
+                <text x="50" y="50" class="bar-label">
+                    Amperes
+                </text>
                 </g>
             </svg>
         </div>
-
-        <div class="container" id="c2-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="rounded-bar" id="c2">
-                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none" />
-                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none" />
+    
+        <div class ="container" id="c3-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c3">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
                 <g transform="rotate(90, 50, 50)" class="bar-text">
-                    <text x="50" y="50" class="bar-number">
-                    </text>
-                    <text x="50" y="50" class="bar-label">
-                        Amperes
-                    </text>
-                </g>
-            </svg>
-        </div>
-
-        <div class="container" id="c3-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="rounded-bar" id="c3">
-                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none" />
-                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none" />
-                <g transform="rotate(90, 50, 50)" class="bar-text">
-                    <text x="50" y="50" class="bar-number">
-                    </text>
-                    <text x="50" y="50" class="bar-label">
-                        Amperes
-                    </text>
+                <text x="50" y="50" class="bar-number">
+                </text>
+                <text x="50" y="50" class="bar-label">
+                    Amperes
+                </text>
                 </g>
             </svg>
         </div>
 
         <div id="graph-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" id="line-graph">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" id="line-graph" >
                 <rect id="outside-line" x="3" y="3" rx="20" ry="20" width="954" height="494"></rect>
             </svg>
         </div>
-
-        <div id="controller">
-            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this); toggleManualButtons(this)">Auto</button>
-            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Switch 1</button>
-            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Switch 2</button>
-            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Switch 3</button>
-            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Switch 4</button>
-            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Switch 5</button>
-            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Switch 6</button>
-            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Switch 7</button>
-            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Switch 8</button>
-            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Switch 9</button>
-        </div>
-
-        <div class="footer">
-
-            <text id="footer-text">
-                2018 | Cracow University of Technology
-            </text>
-
-        </div>
-
+  
     </div>
 
     <script>
 
-        var tick = 0;
-        var arrayOfValues = [];
-        var boxIdentifier = ["v1-box", "c1-box", "v2-box", "c2-box", "v3-box", "c3-box"];
+    var arrayOfValues = [];
 
-        for (let sentinel = 0; sentinel < 6; ++sentinel) {
-            arrayOfValues[sentinel] = [];
+    function init() {
+        getData();
+    }
+
+    function getData() {
+        window.WebSocket = window.WebSocket || window.MozWebSocket;
+        var connection = new WebSocket("ws://pkprojectserver.hopto.org:1337");
+
+        connection.onopen = function () {
+            console.log('WebSocket Status: OPEN');
         }
 
-        function init() {
-            getData();
+        connection.onmessage = function(message) {
+            arrayOfValues = message.data.split(";");
+
+            updateContent(arrayOfValues);
         }
 
-        function changeState(button) {
-            if (button.getAttribute("isDisabled") == "false") {
-                if (button.getAttribute("isPressed") == "false") {
-                    button.setAttribute("isPressed", "true");
-                }
-                else {
-                    button.setAttribute("isPressed", "false");
-                }
+        var tick = 0,
+            amplitude = 250,
+            angularFrequency = 0.32;
+
+        setInterval(function() {
+            function setValue(value, phase = 0) {
+                arrayOfValues[value] = amplitude * Math.sin(tick / 10 * (angularFrequency + 0.5) + phase);
             }
-        }
-
-        function toggleManualButtons(button) {
-            $('.button-relay').not(button).each(
-                function () {
-                    if ($(this).attr('isDisabled') == "false") {
-                        $(this).attr('isDisabled', "true");
-                    }
-                    else if ($(this).attr('isDisabled') == "true") {
-                        $(this).attr('isDisabled', "false");
-                    }
-                }
-            );
-        }
-       
-        function getData() {
-            window.WebSocket = window.WebSocket || window.MozWebSocket;
-            var connection = new WebSocket("ws://pkprojectserver.hopto.org:1337");
-
-            connection.onopen = function () {
-                console.log('WebSocket Status: OPEN');
+            
+            for (let sentinel = 0, phase = 0; sentinel < 6; sentinel = sentinel + 2, phase = phase - 20) {
+                setValue(sentinel, phase);
             }
 
-            connection.onmessage = function (message) {
-                arrayOfValues = message.data.split(";");
+            ++tick;
 
-                updateContent(arrayOfValues);
+            updateContent(arrayOfValues);
+            performTransition = true;
+            data.push(arrayOfValues[0]);
+        }, duration);
+    }
+
+    function updateContent(outputArray) {
+        for (let sentinel = 0; sentinel < outputArray.length; ++sentinel) {
+            var value = +outputArray[sentinel];
+            var $circle = $('.progress');
+            
+            if (isNaN(value)) {
+                value = 250;
             }
-
-            var amplitude = 250,
-                angularFrequency = 0.32;
-
-            setInterval(function () {
-                function setVoltage(value, phase = 0) {
-                    arrayOfValues[value] = amplitude * Math.sin(tick / 10 * (angularFrequency + 0.5) + phase);
+            else {
+                var radius = $circle.eq(sentinel).attr('r');
+                var circumference = Math.PI * (radius * 2);
+            
+                if (value < -250) {
+                    value = 0;
                 }
 
-                function setCurrent(value) {
-                    arrayOfValues[value] = Math.random() * (9.5 - 11) + 11;
+                if (value > 250) {
+                    value = 250;
                 }
-
-                for (let sentinel = 0, phase = 0; sentinel < 6; sentinel = sentinel + 2, phase = phase - 20) {
-                    setVoltage(sentinel, phase);
-                }
-
-                for (let sentinel = 1; sentinel < 6; sentinel = sentinel + 2) {
-                    setCurrent(sentinel);
-                }
-
-                ++tick;
-
-                updateContent(arrayOfValues);
-
-                movingAxis.domain([tick - field + 1, tick]);
-
-                xAxis.transition()
-                    .duration(duration)
-                    .ease(d3.easeLinear)
-                    .call(d3.axisBottom(movingAxis));
-            }, duration);
-        }
-
-        function updateContent(outputArray) {
-            for (let sentinel = 0; sentinel < outputArray.length; ++sentinel) {
-                var value = +outputArray[sentinel];
-                var $circle = $('.progress');
-                var currentDomain = domain;
-                var isVoltage = true;
-                if (sentinel == 1 || sentinel == 3 || sentinel == 5) {
-                    currentDomain = 16;
-                    isVoltage = false;
-                }
-
-                if (isNaN(value)) {
-                    value = currentDomain;
-                }
-                else {
-                    var radius = $circle.eq(sentinel).attr('r');
-                    var circumference = Math.PI * (radius * 2);
-
-                    if (value < -currentDomain) {
-                        value = 0;
-                    }
-
-                    if (value > currentDomain) {
-                        value = currentDomain;
-                    }
-
-                    var fillingValue = ((currentDomain - value) / currentDomain) * circumference;
-                }
-
-                if (isVoltage) {
-                    value = parseInt(value);
-                }
-                else {
-                    value = value.toFixed(1);
-                }
-
-                document.getElementById(boxIdentifier[sentinel]).getElementsByClassName("bar-number")[0].innerHTML = value;
-                document.getElementById(boxIdentifier[sentinel]).getElementsByClassName("progress")[0].style.strokeDashoffset = fillingValue;
+                
+                var fillingValue = ((250 - value) / 250) * circumference;
+                
+                $circle.eq(sentinel).css({
+                    strokeDashoffset: fillingValue
+                });
+                $('.bar-number').eq(sentinel).html(parseInt(value));
             }
         }
+    }
 
-        var duration = 130, field = 40, domain = 350,
-            data1 = d3.range(field),
-            data2 = d3.range(field),
-            data3 = d3.range(field);
+    var proxied = new Proxy(arrayOfValues, {
+        get: function(target, prop) {
+            console.log({ type: 'get', target, prop });
+            return Reflect.get(target, prop);
+        },
+        set: function(target, prop, value) {
+            console.log({ type: 'set', target, prop, value });
+            return Reflect.set(target, prop, value);
+        }
+    });
 
-        data1.fill('0');
-        data2.fill('0');
-        data3.fill('0');
+    var duration = 6, field = 70, domain = 300,
+        random = d3.randomNormal(0, 70),
+        data = d3.range(field),
+        random2 = d3.randomNormal(0, 70),
+        data2 = d3.range(field).map(random2),
+        random3 = d3.randomNormal(0, 70),
+        data3 = d3.range(field).map(random3);
 
-        var svg = d3.select("#line-graph"),
-            margin = { top: 28, right: 25, bottom: 28, left: 60 },
-            viewBox = svg.attr("viewBox").split(" "),
-            size = viewBox.slice(2),
-            width = size[0] - margin.left - margin.right,
-            height = size[1] - margin.top - margin.bottom,
-            g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    data.fill('0');
+    data2.fill('0');
+    data3.fill('0');
 
-        var x = d3.scaleLinear()
-            .domain([0, field - 1])
-            .range([0, width]);
+    var svg = d3.select("#line-graph"),
+        margin = {top: 25, right: 25, bottom: 25, left: 50},
+        viewBox = svg.attr("viewBox").split(" "),
+        size = viewBox.slice(2),
+        width = size[0] - margin.left - margin.right,
+        height = size[1] - margin.top - margin.bottom,
+        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        var movingAxis = d3.scaleLinear()
-            .domain([-field + 1, 0])
-            .range([0, width]);
+    var x = d3.scaleLinear()
+        .domain([0, field - 1])
+        .range([0, width]);
 
-        var y = d3.scaleLinear()
-            .domain([-domain, domain])
-            .range([height, 0]);
+    var y = d3.scaleLinear()
+        .domain([-domain, domain])
+        .range([height, 0]);
 
-        var line = d3.line()
-            .x(function (d, i) { return x(i); })
-            .y(function (d, i) { return y(d); });
+    var line = d3.line()
+        .x(function(d, i) { return x(i); })
+        .y(function(d, i) { return y(d); });
 
-        g.append("defs")
-            .append("clipPath")
-            .attr("id", "clip")
-            .append("rect")
-            .attr("width", width)
-            .attr("height", height);
+    var performTransition = false;
 
-        g.append("g")
-            .attr("clip-path", "url(#clip)")
-            .append("path")
-            .datum(data1)
-            .attr("class", "line1")
-            .transition()
-            .duration(duration)
-            .ease(d3.easeLinear)
-            .on("start", function repeat() {
-                data1.push(arrayOfValues[0]);
-                d3.select(this)
-                    .attr("d", line)
-                    .attr("transform", null);
-                d3.active(this)
-                    .attr("transform", "translate(" + x(-1) + ",0)")
-                    .transition()
-                    .on("start", repeat);
-                data1.shift();
+    g.append("defs")
+    .append("clipPath")
+        .attr("id", "clip")
+    .append("rect")
+        .attr("width", width)
+        .attr("height", height);
+
+    g.append("g")
+        .attr("clip-path", "url(#clip)")
+    .append("path")
+        .datum(data)
+        .attr("class", "line")
+    .transition()
+        .duration(duration)
+        .ease(d3.easeLinear)
+        .on("start", function repeat() {
+            //if(proxied.arrayOfValues)
+            //{
+            
+            //data.push(arrayOfValues[0]);
+        d3.select(this)
+            .attr("d", line)
+            .attr("transform", null);
+        d3.active(this)
+            .attr("transform", "translate(" + x(-1) + ",0)")
+        .transition()
+            .on("start", repeat);
+            data.shift();
+           // }
+        })
+        
+        ;
+
+        // .on("start", function repeat() {
+        //     data.push(arrayOfValues[0]);
+        // d3.select(this)
+        //     .attr("d", line)
+        //     .attr("transform", null);
+        // d3.active(this)
+        //     .attr("transform", "translate(" + x(-1) + ",0)")
+        // .transition()
+        //     .on("start", repeat);
+        //     data.shift();
+        // });
+
+    g.append("g")
+        .attr("clip-path", "url(#clip)")
+    .append("path")
+        .datum(data2)
+        .attr("class", "line2")
+    .transition()
+        .duration(duration)
+        .ease(d3.easeLinear)
+        .on("start", function repeat() {
+            data2.push(arrayOfValues[2]);
+        d3.select(this)
+            .attr("d", line)
+            .attr("transform", null);
+        d3.active(this)
+            .attr("transform", "translate(" + x(-1) + ",0)")
+        .transition()
+            .on("start", repeat);
+            data2.shift();
             });
 
-        g.append("g")
-            .attr("clip-path", "url(#clip)")
-            .append("path")
-            .datum(data2)
-            .attr("class", "line2")
-            .transition()
-            .duration(duration)
-            .ease(d3.easeLinear)
-            .on("start", function repeat() {
-                data2.push(arrayOfValues[2]);
-                d3.select(this)
-                    .attr("d", line)
-                    .attr("transform", null);
-                d3.active(this)
-                    .attr("transform", "translate(" + x(-1) + ",0)")
-                    .transition()
-                    .on("start", repeat);
-                data2.shift();
+    g.append("g")
+        .attr("clip-path", "url(#clip)")
+    .append("path")
+        .datum(data3)
+        .attr("class", "line3")
+    .transition()
+        .duration(duration)
+        .ease(d3.easeLinear)
+        .on("start", function repeat() {
+            data3.push(arrayOfValues[4]);
+        d3.select(this)
+            .attr("d", line)
+            .attr("transform", null);
+        d3.active(this)
+            .attr("transform", "translate(" + x(-1) + ",0)")
+        .transition()
+            .on("start", repeat);
+            data3.shift();
             });
 
-        g.append("g")
-            .attr("clip-path", "url(#clip)")
-            .append("path")
-            .datum(data3)
-            .attr("class", "line3")
-            .transition()
-            .duration(duration)
-            .ease(d3.easeLinear)
-            .on("start", function repeat() {
-                data3.push(arrayOfValues[4]);
-                d3.select(this)
-                    .attr("d", line)
-                    .attr("transform", null);
-                d3.active(this)
-                    .attr("transform", "translate(" + x(-1) + ",0)")
-                    .transition()
-                    .on("start", repeat);
-                data3.shift();
-            });
+    g.append("g")
+        .attr("class", "axisStyle")
+        .call(d3.axisLeft(y));
 
-        g.append("g")
-            .attr("class", "axis-style")
-            .call(d3.axisLeft(y));
+    g.append("g")
+        .attr("class", "axisStyle")
+        .attr("transform", "translate(0," + y(0) + ")")
+        .call(d3.axisBottom(x));
 
-        var xAxis = g.append("g")
-            .attr("class", "axis-style")
-            .attr("transform", "translate(0," + y(0) + ")")
-            .call(d3.axisBottom(movingAxis));
+         // .on("start", function repeat() {
+        //     $('#arrayOfValues').on('change', function() {
+        //         .push(arrayOfValues[0]);
+        //     d3.select(this)
+        //         .attr("d", line)
+        //         .attr("transform", null);
+        //     d3.active(this)
+        //         .attr("transform", "translate(" + x(-1) + ",0)")
+        //     .transition()
+        //         .on("start", repeat);
+        //         data.shift();
+        //     })
+        // });
 
     </script>
 

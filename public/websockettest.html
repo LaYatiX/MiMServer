@@ -56,26 +56,28 @@
     <script>
         window.WebSocket = window.WebSocket || window.MozWebSocket;
          var connection = new WebSocket("ws://pkprojectserver.hopto.org:1337");
-         
          connection.onopen = function () {
              console.log('open');
              document.getElementById('status').innerHTML = "Connected";
-         }
-         var input = document.getElementById("input");
-         input.onkeydown = function (e) {
-             if(e.keyCode == 13) { //enter
-                var msg = input.value;
-                if(!msg) return;
-                connection.send(msg);
-                input.value = "";
-             }
-         }
-         var old = 0;
-         var content = document.getElementById("content");
-         connection.onmessage = function (msg) {
-             var p = document.createElement("p");
-             p.appendChild(document.createTextNode(msg.data));
-            content.appendChild(p);
+            }
+            var input = document.getElementById("input");
+            input.onkeydown = function (e) {
+                if(e.keyCode == 13) { //enter
+                    var msg = input.value;
+                    if(!msg) return;
+                    connection.send(msg);
+                    input.value = "";
+                }
+            }
+            var old = 0;
+            var content = document.getElementById("content");
+            connection.onmessage = function (msg) {
+                var p = document.createElement("p");
+                p.appendChild(document.createTextNode(msg.data));
+                content.appendChild(p);
+                var myElement = document.querySelector('#content > p:last-child');                
+                var topPos = myElement.offsetTop;
+                document.getElementById('content').scrollTop = topPos;
             // var newdate = new Date().valueOf();
             // console.log(newdate-old);
             // old = newdate;
