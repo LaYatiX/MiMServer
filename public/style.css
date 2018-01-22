@@ -1,10 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  width: 100%;
-  height: 100%;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Lato', 'Open Sans', sans-serif;
   text-align: center;
   background: #212121;
   color: #c4c4c4;
+  -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+  user-select: none;
+}
+
+.footer {
+  position: relative;
+  margin: 4em 0 0 0;
+}
+
+#footer-text {
+  padding: 1.4em;
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  color: #333;
+  font-size: 0.8em;
+}
+
+.container {
+  margin: 0 0 0.2em 0;
 }
 
 .rounded-bar {
@@ -18,39 +43,45 @@ body {
 }
 
 .backdrop {
-  stroke-width: 7;
+  stroke-width: 7.3;
   stroke: #333;
 }
 
 .progress {
-  stroke-width: 7;
+  stroke-width: 7.3;
   stroke: rgb(50, 73, 160);
   stroke-dashoffset: 125;
-  transition: stroke-dashoffset 300ms cubic-bezier(.88,.23,.26,.84);
+  transition: stroke-dashoffset 250ms linear;
 }
 
 #v1 > .progress {
+  stroke: rgb(28, 55, 151);
   stroke-dashoffset: 40;
 }
 
 #v2 > .progress {
-  stroke-dashoffset: 80;
-}
-
-#v3 > .progress {
+  stroke: rgb(16, 141, 16);
   stroke-dashoffset: 120;
 }
 
+#v3 > .progress {
+  stroke: rgb(143, 18, 18);
+  stroke-dashoffset: 80;
+}
+
 #c1 > .progress {
+  stroke: rgb(28, 55, 151);
   stroke-dashoffset: 140;
 }
 
 #c2 > .progress {
-  stroke-dashoffset: 160;
+  stroke: rgb(16, 141, 16);
+  stroke-dashoffset: 200;
 }
 
 #c3 > .progress {
-  stroke-dashoffset: 200;
+  stroke: rgb(143, 18, 18);
+  stroke-dashoffset: 160;
 }
 
 .bar-text {
@@ -58,43 +89,206 @@ body {
 }
 
 .bar-number {
-  font-size: 0.85em;
+  font-size: 0.855em;
   line-height: 1;
   text-anchor: middle;
-  -moz-transform: translateY(-0.12em);
-  -ms-transform: translateY(-0.12em);
-  -webkit-transform: translateY(-0.12em);
-  transform: translateY(-0.12em);
 }
 
 .bar-label {
-  font-size: 0.5em;
+  font-size: 0.51em;
   text-anchor: middle;
-  -moz-transform: translateY(0.95em);
-  -ms-transform: translateY(0.95em);
-  -webkit-transform: translateY(0.95em);
-  transform: translateY(0.95em);
+  -moz-transform: translateY(1.16em);
+  -ms-transform: translateY(1.16em);
+  -webkit-transform: translateY(1.16em);
+  transform: translateY(1.2em);
+}
+
+/* Graph Styling */
+
+#outside-line {
+  fill: #212121;
+  stroke: #333;
+  stroke-width: 5;
+}
+
+.line1 {
+  fill: none;
+  stroke: rgb(28, 55, 151);
+  stroke-width: 4.25;
+}
+
+.line2 {
+  fill: none;
+  stroke: rgb(16, 141, 16);
+  stroke-width: 4.25;
+}
+
+.line3 {
+  fill: none;
+  stroke: rgb(143, 18, 18);
+  /* stroke: rgb(109, 21, 21); */
+  stroke-width: 4.25;
+}
+
+.axis-style line{
+  stroke:#c4c4c4;
+  stroke-width: 1.8;
+}
+
+.axis-style path{
+  stroke:#c4c4c4;
+  stroke-width: 1.6;
+}
+
+.axis-style text{
+  fill:#c4c4c4;
+  font-size: 1.45em;
+  font-family: 'Lato', 'Open-Sans', sans-serif;
+}
+
+#graph-container {
+  margin: 1em 0 0.5em 0;
+}
+
+/* End of Graph Styling */
+
+#controller {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.2em;
+}
+
+.button-relay {
+  flex: 1;
+  margin: 3.2% auto;
+  border: 0.2em solid #333;
+  color: #f0f0f0;
+  background: none;
+  border-radius: 0.68em;
+  min-width: 40%;
+  min-height: 5%;
+  font-family: 'Lato', 'Open-Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 0.9em;
+  font-weight: 300;
+  cursor: pointer;
+  outline: none;
+  transition: all 150ms cubic-bezier(0,.83,.6,1),
+    border 220ms cubic-bezier(0,.83,.6,1),
+    color 200ms cubic-bezier(0,.83,.6,1);
+}
+
+.button-relay:nth-last-child(1) {
+  margin: 3.2% auto 2.7% auto;
+}
+
+.button-relay:hover {
+  background-color: #1b1b1b;
+}
+
+.button-relay:active {
+  color: #bebebe;
+  background-color: #161616;
+  border: 0.2em solid #202020;
+}
+
+.button-relay[isPressed = "true"] {
+  color: rgb(28, 55, 151);
+  border: 0.2em solid rgb(25, 27, 136);
+}
+
+.button-relay[isDisabled = "true"] {
+  color: #333;
+  border: 0.2em solid #333;
+}
+
+@media screen and (max-width: 735px)
+{
+  .grid {
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 80%;
+    height: 90%;
+    min-width: 20em;
+    transform-origin: center;
+    transform: translate(-50%, -50%);
+  }
+
+  #v1-box, #v2-box, #v3-box {
+    float: left;
+    width: 33.33%;
+  }
+
+  #c1-box, #c2-box, #c3-box {
+    float: left;
+    width: 33.33%;
+  }
+
+  #controller {
+    display: inline-block;
+    text-align: center;
+  }
+
+  .button-relay {
+    margin: 0.5em 1em;
+    border: 0.13em solid #333;
+    color: #f0f0f0;
+    background: none;
+    border-radius: 0.68em;
+    min-width: 6em;
+    min-height: 3em;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 0.7em;
+    font-weight: 350;
+    cursor: pointer;
+    outline: none;
+    transition: all 150ms cubic-bezier(0,.83,.6,1),
+      border 220ms cubic-bezier(0,.83,.6,1),
+      color 200ms cubic-bezier(0,.83,.6,1);
+  }
+
+  .footer {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 8;
+  }
+
+  #footer-text {
+    font-size: 1.6vw;
+  }
 }
 
 @media screen and (min-width: 736px)
 {
   .grid {
+    display: -ms-grid-;
     display: grid;
-    grid-template-columns: 3fr repeat(3, 2fr) 3fr;
-    grid-template-rows: minmax(10%, 1fr) repeat(2, 1fr) minmax(10%, 1fr);
+    grid-template-columns: 10% repeat(5, 2fr) 10%;
+    grid-template-rows: repeat(5, 1fr);
     grid-template-areas:
-    ". . . . ."
-    ". v1 v2 v3 ."
-    ". c1 c2 c3 ."
-    ". . . . .";
+    ". . . . . . ."
+    ". v1 v2 v3 controller controller ."
+    ". c1 c2 c3 controller controller ."
+    ". chart chart chart controller controller ."
+    ". . . . . . .";
     margin: 0 auto;
     position: absolute;
     left: 50%;
     top: 50%;
     width: 100%;
     height: 100%;
+    max-width: 70%;
+    min-width: 46em;
     transform-origin: center;
     transform: translate(-50%, -50%);
+    vertical-align: middle;
   }
 
   #v1-box {
@@ -119,5 +313,24 @@ body {
 
   #c3-box {
     grid-area: c3
+  }
+
+  #graph-container {
+    grid-area: chart
+  }
+
+  #controller {
+    grid-area: controller;
+  }
+
+  .footer {
+    grid-row-start: 5;
+    grid-row-end: 6;
+    grid-column-start: 1;
+    grid-column-end: 8;
+  }
+
+  .button-relay {
+    font-size: calc(0.38em + 0.39vw);
   }
 }
