@@ -1,6 +1,7 @@
 'use strict';
 var helpers = require('../helpers/helpers.js');
 var relay = require('../controllers/relaysController');
+var arduinoController = require('../controllers/arduinoController');
 var clientsData = [];
 var clientsRelays = [];
 var http = require('http');
@@ -29,8 +30,8 @@ wsServer.on('request', function (req) {
     connection.on('message', function (message) {
         var msg = message.utf8Data;
         var records = msg.split("|");
-        if(helpers.isRecordsValid(records)){ 
-            records.forEach(record => {
+        if(helpers.isRecordsValid(records)){
+            /*records.forEach(record => {
                 messages.push({ data: record });
             });
             Measurement.insertMany(messages, (err) => {
@@ -38,7 +39,7 @@ wsServer.on('request', function (req) {
                 else console.log("Error inserting in bulk" + err);
             }).then(() => {
                 console.log("bulk executed");
-            })
+            })*/
         }
         else{
             helpers.sendInvalidDataErr(clientsData, msg);

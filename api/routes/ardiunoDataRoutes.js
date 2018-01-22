@@ -15,6 +15,9 @@ app.route('/api/delete')
 app.route('/api/delete')
 .get(arduino.delete_all);
 
+app.route('/api/countRecords')
+.get(arduino.count_measurement);
+
 app.route('/api/getlatest')
     .get(arduino.read_last_measurement)
 };   

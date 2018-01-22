@@ -25,14 +25,34 @@ exports.create_measurement = function(req, res) {
 };
 
  
+exports.count_measurement = function(req, res) {
+  var c = 0;
+  Task.count({}, function( err, count){
+    c= count;
+    res.send(count.toString());
+  }).then(function (count) {
+    console.log( "Number of records 2: ", count );
+    return count;
+  })
+};
+
 exports.read_last_measurement = function(req, res) {
-  Task.findOne({}, {data: 1, _id:0}, { sort: { 'Created_date' : -1 } }, function(err, task) {
+  Task.findOne({}, { data: 1,_id:0}, { sort: { 'Created_date' : -1 } }, function(err, task) {
     if (err || !task)
       res.send("Error, no data available")
     else
       res.send(task.data);
   });
 };
+
+exports.delete_old = function(req, res) {
+  Task.remove({Created_date: {$gte: Date.now+24*60*60}}, function(err, measurement) {
+    if (err)
+      res.send(err);
+    else
+      res.json({ message: 'All old measurement successfully deleted' });
+  });
+};  
 
 exports.delete_all = function(req, res) {
   Task.remove({}, function(err, measurement) {

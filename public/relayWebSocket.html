@@ -56,7 +56,7 @@
     <script>
         window.WebSocket = window.WebSocket || window.MozWebSocket;
          var connection = new WebSocket("ws://pkprojectserver.hopto.org:1338");
-         
+          
          connection.onopen = function () {
              console.log('open');
              document.getElementById('status').innerHTML = "Connected";
