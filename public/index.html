@@ -3,334 +3,519 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Analyser</title>
+    <title>Analyser - M&amp;M</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script src="jquery-3.2.1.min.js"></script>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/d3-selection-multi.v0.4.min.js"></script>
+    <script src="d3.v4.min.js"></script>
+    <link rel="shortcut icon" href="icon.png" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 </head>
 
-<body onload="init();">
+<body onload="init()">
 
     <div class="grid">
 
-        <div class ="container" id="v1-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v1">
-                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
-                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+        <div class="container" id="v1-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="rounded-bar" id="v1">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none" />
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none" />
                 <g transform="rotate(90, 50, 50)" class="bar-text">
-                <text x="50" y="50" class="bar-number">
-                </text>
-                <text x="50" y="50" class="bar-label">
-                Volts
-                </text>
-                </g>
-        </svg>
-        </div>
-
-        <div class ="container" id="v2-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v2">
-                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
-                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
-                <g transform="rotate(90, 50, 50)" class="bar-text">
-                <text x="50" y="50" class="bar-number">
-                </text>
-                <text x="50" y="50" class="bar-label">
-                    Volts
-                </text>
+                    <text x="50" y="50" class="bar-number">
+                        0
+                    </text>
+                    <text x="50" y="50" class="bar-label">
+                        Volts
+                    </text>
                 </g>
             </svg>
         </div>
 
-        <div class ="container" id="v3-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="v3">
-                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
-                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+        <div class="container" id="v2-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="rounded-bar" id="v2">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none" />
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none" />
                 <g transform="rotate(90, 50, 50)" class="bar-text">
-                <text x="50" y="50" class="bar-number">
-                </text>
-                <text x="50" y="50" class="bar-label">
-                    Volts
-                </text>
+                    <text x="50" y="50" class="bar-number">
+                        0
+                    </text>
+                    <text x="50" y="50" class="bar-label">
+                        Volts
+                    </text>
                 </g>
             </svg>
         </div>
 
-        <div class ="container" id="c1-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c1">
-                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
-                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+        <div class="container" id="v3-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="rounded-bar" id="v3">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none" />
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none" />
                 <g transform="rotate(90, 50, 50)" class="bar-text">
-                <text x="50" y="50" class="bar-number">
-                </text>
-                <text x="50" y="50" class="bar-label">
-                    Amperes
-                </text>
+                    <text x="50" y="50" class="bar-number">
+                        0
+                    </text>
+                    <text x="50" y="50" class="bar-label">
+                        Volts
+                    </text>
                 </g>
             </svg>
         </div>
-    
-        <div class ="container" id="c2-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c2">
-                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
-                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+
+        <div class="container" id="c1-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="rounded-bar" id="c1">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none" />
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none" />
                 <g transform="rotate(90, 50, 50)" class="bar-text">
-                <text x="50" y="50" class="bar-number">
-                </text>
-                <text x="50" y="50" class="bar-label">
-                    Amperes
-                </text>
+                    <text x="50" y="50" class="bar-number">
+                        0.0
+                    </text>
+                    <text x="50" y="50" class="bar-label">
+                        Amperes
+                    </text>
                 </g>
             </svg>
         </div>
-    
-        <div class ="container" id="c3-box">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class ="rounded-bar" id="c3">
-                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none"/>
-                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none"/>
+
+        <div class="container" id="c2-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="rounded-bar" id="c2">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none" />
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none" />
                 <g transform="rotate(90, 50, 50)" class="bar-text">
-                <text x="50" y="50" class="bar-number">
-                </text>
-                <text x="50" y="50" class="bar-label">
-                    Amperes
-                </text>
+                    <text x="50" y="50" class="bar-number">
+                        0.0
+                    </text>
+                    <text x="50" y="50" class="bar-label">
+                        Amperes
+                    </text>
+                </g>
+            </svg>
+        </div>
+
+        <div class="container" id="c3-box">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="rounded-bar" id="c3">
+                <circle class="backdrop" r="39.7887357725" cy="50" cx="50" fill="none" />
+                <circle class="progress" r="39.7887357725" cy="50" cx="50" fill="none" />
+                <g transform="rotate(90, 50, 50)" class="bar-text">
+                    <text x="50" y="50" class="bar-number">
+                        0.0
+                    </text>
+                    <text x="50" y="50" class="bar-label">
+                        Amperes
+                    </text>
                 </g>
             </svg>
         </div>
 
         <div id="graph-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" id="line-graph" >
-                <rect id="outside-line" x="3" y="3" rx="20" ry="20" width="954" height="494"></rect>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" id="line-graph">
+                <g>
+                    <rect id="outside-line" x="3" y="3" rx="20" ry="20" width="954" height="494"></rect>
+                    <text x="370" y="150" id="data-message">...Gathering Data...</text>
+                </g>
             </svg>
         </div>
-  
+
+        <div id="controller">
+            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this); toggleManualButtons(this)">Auto</button>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 2" id="horizontal-line">
+                <line x1="47" y1="1" x2="53" y2="1" />
+            </svg>
+            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Relay #1</button>
+            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Relay #2</button>
+            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Relay #3</button>
+            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Relay #4</button>
+            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Relay #5</button>
+            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Relay #6</button>
+            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Relay #7</button>
+            <button class="button-relay" isPressed="false" isDisabled="false" onclick="changeState(this)">Relay #8</button>
+        </div>
+
+        <div class="footer">
+
+            <text id="footer-text">
+                2018 | Cracow University of Technology
+            </text>
+
+        </div>
+
     </div>
 
     <script>
 
-    var arrayOfValues = [];
-
-    function init() {
-        getData();
-    }
-
-    function getData() {
+        var tick = 0;
+        var arraySize = 100;
+        var numOfParameters = 6;
+        var parametersData = [];
+        var idleData = [];
+        var currentData = [];
+        var isBeingDisplayed = false;
+        var boxIdentifier = ["v1-box", "c1-box", "v2-box", "c2-box", "v3-box", "c3-box"];
         window.WebSocket = window.WebSocket || window.MozWebSocket;
-        var connection = new WebSocket("ws://pkprojectserver.hopto.org:1337");
+        var dataConnection = new WebSocket("ws://pkprojectserver.hopto.org:1337");
+        var relaysConnection = new WebSocket("ws://pkprojectserver.hopto.org:1338");
 
-        connection.onopen = function () {
-            console.log('WebSocket Status: OPEN');
+        for (let sentinel = 0; sentinel < arraySize; ++sentinel) {
+            idleData[sentinel] = [];
         }
 
-        connection.onmessage = function(message) {
-            arrayOfValues = message.data.split(";");
-
-            updateContent(arrayOfValues);
+        for (let sentinel = 0; sentinel < numOfParameters; ++sentinel) {
+            currentData[sentinel] = [];
         }
 
-        var tick = 0,
-            amplitude = 250,
-            angularFrequency = 0.32;
+        function init() {
+            startAnimation();
+            getRelaysStatus();
+            getData();
+        }
 
-        setInterval(function() {
-            function setValue(value, phase = 0) {
-                arrayOfValues[value] = amplitude * Math.sin(tick / 10 * (angularFrequency + 0.5) + phase);
-            }
-            
-            for (let sentinel = 0, phase = 0; sentinel < 6; sentinel = sentinel + 2, phase = phase - 20) {
-                setValue(sentinel, phase);
-            }
+        function startAnimation() {
+            $('#data-message').addClass('active');
+        }
 
-            ++tick;
+        function stopAnimation() {
+            $('#data-message').on('animationiteration webkitAnimationIteration', function () {
+                var $this = $(this);
 
-            updateContent(arrayOfValues);
-            performTransition = true;
-            data.push(arrayOfValues[0]);
-        }, duration);
-    }
+                $this.removeClass('active');
 
-    function updateContent(outputArray) {
-        for (let sentinel = 0; sentinel < outputArray.length; ++sentinel) {
-            var value = +outputArray[sentinel];
-            var $circle = $('.progress');
-            
-            if (isNaN(value)) {
-                value = 250;
-            }
-            else {
-                var radius = $circle.eq(sentinel).attr('r');
-                var circumference = Math.PI * (radius * 2);
-            
-                if (value < -250) {
-                    value = 0;
+                $this.off();
+            });
+        }
+
+        function idleToCurrent() {
+            currentData = idleData.slice(0);
+        }
+
+        function changeState(button) {
+            if (button.getAttribute("isDisabled") == "false") {
+                if (button.getAttribute("isPressed") == "false") {
+                    button.setAttribute("isPressed", "true");
+                }
+                else {
+                    button.setAttribute("isPressed", "false");
                 }
 
-                if (value > 250) {
-                    value = 250;
-                }
-                
-                var fillingValue = ((250 - value) / 250) * circumference;
-                
-                $circle.eq(sentinel).css({
-                    strokeDashoffset: fillingValue
-                });
-                $('.bar-number').eq(sentinel).html(parseInt(value));
+                sendRelaysStatus();
             }
         }
-    }
 
-    var proxied = new Proxy(arrayOfValues, {
-        get: function(target, prop) {
-            console.log({ type: 'get', target, prop });
-            return Reflect.get(target, prop);
-        },
-        set: function(target, prop, value) {
-            console.log({ type: 'set', target, prop, value });
-            return Reflect.set(target, prop, value);
+        function toggleManualButtons(button) {
+            $('.button-relay').not(button).each(
+                function () {
+                    if ($(this).attr('isDisabled') == "false") {
+                        $(this).attr('isDisabled', "true");
+                    }
+                    else if ($(this).attr('isDisabled') == "true") {
+                        $(this).attr('isDisabled', "false");
+                    }
+                }
+            );
         }
-    });
 
-    var duration = 6, field = 70, domain = 300,
-        random = d3.randomNormal(0, 70),
-        data = d3.range(field),
-        random2 = d3.randomNormal(0, 70),
-        data2 = d3.range(field).map(random2),
-        random3 = d3.randomNormal(0, 70),
-        data3 = d3.range(field).map(random3);
+        function myEndFunction() {
+            document.getElementById("data-message").style.color = "red";
+        }
 
-    data.fill('0');
-    data2.fill('0');
-    data3.fill('0');
+        function getData() {
+            dataConnection.onopen = function () {
+                console.log('Main WebSocket Status: OPEN');
+            }
 
-    var svg = d3.select("#line-graph"),
-        margin = {top: 25, right: 25, bottom: 25, left: 50},
-        viewBox = svg.attr("viewBox").split(" "),
-        size = viewBox.slice(2),
-        width = size[0] - margin.left - margin.right,
-        height = size[1] - margin.top - margin.bottom,
-        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            dataConnection.onmessage = function (message) {
+                stopAnimation();
 
-    var x = d3.scaleLinear()
-        .domain([0, field - 1])
-        .range([0, width]);
+                if (!isBeingDisplayed) {
+                    idleData = message.data.split("|");
 
-    var y = d3.scaleLinear()
-        .domain([-domain, domain])
-        .range([height, 0]);
+                    for (let sentinel = 0; sentinel < idleData.length; ++sentinel) {
+                        idleData[sentinel] = idleData[sentinel].split(";");
+                    }
 
-    var line = d3.line()
-        .x(function(d, i) { return x(i); })
-        .y(function(d, i) { return y(d); });
+                    displayCurrentData();
+                }
+            }
 
-    var performTransition = false;
+            setInterval(function () {
+                shiftAxis(tick);
+                ++tick;
+            }, duration);
+        }
 
-    g.append("defs")
-    .append("clipPath")
-        .attr("id", "clip")
-    .append("rect")
-        .attr("width", width)
-        .attr("height", height);
+        function getRelaysStatus() {
+            relaysConnection.onopen = function () {
+                console.log('Relays WebSocket Status: OPEN');
+            }
 
-    g.append("g")
-        .attr("clip-path", "url(#clip)")
-    .append("path")
-        .datum(data)
-        .attr("class", "line")
-    .transition()
-        .duration(duration)
-        .ease(d3.easeLinear)
-        .on("start", function repeat() {
-            //if(proxied.arrayOfValues)
-            //{
-            
-            //data.push(arrayOfValues[0]);
-        d3.select(this)
-            .attr("d", line)
-            .attr("transform", null);
-        d3.active(this)
-            .attr("transform", "translate(" + x(-1) + ",0)")
-        .transition()
-            .on("start", repeat);
-            data.shift();
-           // }
-        })
-        
-        ;
+            $.ajax({
+                type: "GET",
+                url: "http://pkprojectserver.hopto.org:8080/api/relays/getlatest",
+                dataType: "text",
+                success: function (relaysStatus) {
+                    setRelaysStatus(relaysStatus);
+                },
+                error: function (errorMessage) {
+                    console.log(errorMessage);
+                }
+            });
+        }
 
-        // .on("start", function repeat() {
-        //     data.push(arrayOfValues[0]);
-        // d3.select(this)
-        //     .attr("d", line)
-        //     .attr("transform", null);
-        // d3.active(this)
-        //     .attr("transform", "translate(" + x(-1) + ",0)")
-        // .transition()
-        //     .on("start", repeat);
-        //     data.shift();
-        // });
+        function setRelaysStatus(relaysStatus) {
+            $('.button-relay:not(:first)').each(
+                function (index) {
+                    if (relaysStatus.charAt(index) == '1') {
+                        $(this).attr('isPressed', "true");
+                    }
+                    else {
+                        $(this).attr('isPressed', "false");
+                    }
+                }
+            );
+        }
 
-    g.append("g")
-        .attr("clip-path", "url(#clip)")
-    .append("path")
-        .datum(data2)
-        .attr("class", "line2")
-    .transition()
-        .duration(duration)
-        .ease(d3.easeLinear)
-        .on("start", function repeat() {
-            data2.push(arrayOfValues[2]);
-        d3.select(this)
-            .attr("d", line)
-            .attr("transform", null);
-        d3.active(this)
-            .attr("transform", "translate(" + x(-1) + ",0)")
-        .transition()
-            .on("start", repeat);
-            data2.shift();
+        function sendRelaysStatus() {
+            var relaysStatus = "";
+
+            $('.button-relay:not(:first)').each(
+                function (index) {
+                    console.log(index);
+                    if ($(this).attr('isPressed') == "true") {
+                        relaysStatus += "1";
+                    }
+                    else if ($(this).attr('isPressed') == "false") {
+                        relaysStatus += "0";
+                    }
+                }
+            );
+
+            relaysConnection.send(relaysStatus);
+        }
+
+        function shiftAxis(value) {
+            movingAxis.domain([value - field + 1, value]);
+
+            xAxis.transition()
+                .duration(duration)
+                .ease(d3.easeLinear)
+                .call(d3.axisBottom(movingAxis));
+        }
+
+        function displayCurrentData() {
+            isBeingDisplayed = true;
+            var sentinel = 0;
+            idleToCurrent();
+
+            var isIntervalAllowed = setInterval(function () {
+                if (sentinel == currentData.length - 1) {
+                    clearInterval(isIntervalAllowed);
+                }
+
+                if (typeof currentData[sentinel] !== 'undefined' && typeof currentData[sentinel][0] !== 'undefined') {
+                    parametersData[0] = currentData[sentinel][0];
+                    parametersData[2] = currentData[sentinel][2];
+                    parametersData[4] = currentData[sentinel][4];
+                    updateContent(currentData[sentinel]);
+                }
+                else {
+                    parametersData[0] = parametersData[2] = parametersData[4] = 0;
+                }
+
+                ++sentinel;
+            }, duration);
+
+            isBeingDisplayed = false;
+        }
+
+        function generateData() {
+            var amplitude = 250,
+                angularFrequency = 0.32;
+
+            setInterval(function () {
+                function setVoltage(value, phase = 0) {
+                    parametersData[value] = amplitude * Math.sin(tick / 10 * (angularFrequency + 0.5) + phase);
+                }
+
+                function setCurrent(value) {
+                    parametersData[value] = Math.random() * (9.5 - 11) + 11;
+                }
+
+                for (let sentinel = 0, phase = 0; sentinel < numOfParameters; sentinel = sentinel + 2, phase = phase - 20) {
+                    setVoltage(sentinel, phase);
+                }
+
+                for (let sentinel = 1; sentinel < numOfParameters; sentinel = sentinel + 2) {
+                    setCurrent(sentinel);
+                }
+
+                ++tick;
+
+                updateContent(parametersData);
+                shiftAxis(tick);
+            }, duration);
+        }
+
+        function updateContent(arrayOfValues) {
+            for (let sentinel = 0; sentinel < arrayOfValues.length; ++sentinel) {
+                var value = +arrayOfValues[sentinel];
+                var $circle = $('.progress');
+                var currentDomain = domain;
+                var isVoltage = true;
+                if (sentinel % 2) {
+                    currentDomain = 16;
+                    isVoltage = false;
+                }
+
+                if (isNaN(value)) {
+                    value = currentDomain;
+                }
+                else {
+                    var radius = $circle.eq(sentinel).attr('r');
+                    var circumference = Math.PI * (radius * 2);
+
+                    if (value < -currentDomain) {
+                        value = 0;
+                    }
+
+                    if (value > currentDomain) {
+                        value = currentDomain;
+                    }
+
+                    var fillingValue = ((currentDomain - value) / currentDomain) * circumference;
+                }
+
+                if (isVoltage) {
+                    value = parseInt(value);
+                }
+                else {
+                    value = value.toFixed(1);
+                }
+
+                document.getElementById(boxIdentifier[sentinel]).getElementsByClassName("bar-number")[0].innerHTML = value;
+                document.getElementById(boxIdentifier[sentinel]).getElementsByClassName("progress")[0].style.strokeDashoffset = fillingValue;
+            }
+        }
+
+        var duration = 130, field = 40, domain = 350,
+            data1 = d3.range(field),
+            data2 = d3.range(field),
+            data3 = d3.range(field);
+
+        data1.fill('0');
+        data2.fill('0');
+        data3.fill('0');
+
+        var svg = d3.select("#line-graph"),
+            margin = { top: 28, right: 25, bottom: 28, left: 60 },
+            viewBox = svg.attr("viewBox").split(" "),
+            size = viewBox.slice(2),
+            width = size[0] - margin.left - margin.right,
+            height = size[1] - margin.top - margin.bottom,
+            g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var x = d3.scaleLinear()
+            .domain([0, field - 1])
+            .range([0, width]);
+
+        var movingAxis = d3.scaleLinear()
+            .domain([-field + 1, 0])
+            .range([0, width]);
+
+        var y = d3.scaleLinear()
+            .domain([-domain, domain])
+            .range([height, 0]);
+
+        var line = d3.line()
+            .x(function (d, i) { return x(i); })
+            .y(function (d, i) { return y(d); });
+
+        g.append("defs")
+            .append("clipPath")
+            .attr("id", "clip")
+            .append("rect")
+            .attr("width", width)
+            .attr("height", height);
+
+        g.append("g")
+            .attr("clip-path", "url(#clip)")
+            .append("path")
+            .datum(data1)
+            .attr("class", "line1")
+            .transition()
+            .duration(duration)
+            .ease(d3.easeLinear)
+            .on("start", function repeat() {
+                if (parametersData[0] != undefined) {
+                    data1.push(parametersData[0]);
+                }
+                else {
+                    data1.push(data1[field - 1]);
+                }
+                d3.select(this)
+                    .attr("d", line)
+                    .attr("transform", null);
+                d3.active(this)
+                    .attr("transform", "translate(" + x(-1) + ",0)")
+                    .transition()
+                    .on("start", repeat);
+                data1.shift();
             });
 
-    g.append("g")
-        .attr("clip-path", "url(#clip)")
-    .append("path")
-        .datum(data3)
-        .attr("class", "line3")
-    .transition()
-        .duration(duration)
-        .ease(d3.easeLinear)
-        .on("start", function repeat() {
-            data3.push(arrayOfValues[4]);
-        d3.select(this)
-            .attr("d", line)
-            .attr("transform", null);
-        d3.active(this)
-            .attr("transform", "translate(" + x(-1) + ",0)")
-        .transition()
-            .on("start", repeat);
-            data3.shift();
+        g.append("g")
+            .attr("clip-path", "url(#clip)")
+            .append("path")
+            .datum(data2)
+            .attr("class", "line2")
+            .transition()
+            .duration(duration)
+            .ease(d3.easeLinear)
+            .on("start", function repeat() {
+                if (parametersData[2] != undefined) {
+                    data2.push(parametersData[2]);
+                }
+                else {
+                    data2.push(data2[field - 1]);
+                }
+                d3.select(this)
+                    .attr("d", line)
+                    .attr("transform", null);
+                d3.active(this)
+                    .attr("transform", "translate(" + x(-1) + ",0)")
+                    .transition()
+                    .on("start", repeat);
+                data2.shift();
             });
 
-    g.append("g")
-        .attr("class", "axisStyle")
-        .call(d3.axisLeft(y));
+        g.append("g")
+            .attr("clip-path", "url(#clip)")
+            .append("path")
+            .datum(data3)
+            .attr("class", "line3")
+            .transition()
+            .duration(duration)
+            .ease(d3.easeLinear)
+            .on("start", function repeat() {
+                if (parametersData[4] != undefined) {
+                    data3.push(parametersData[4]);
+                }
+                else {
+                    data3.push(data3[field - 1]);
+                }
+                d3.select(this)
+                    .attr("d", line)
+                    .attr("transform", null);
+                d3.active(this)
+                    .attr("transform", "translate(" + x(-1) + ",0)")
+                    .transition()
+                    .on("start", repeat);
+                data3.shift();
+            });
 
-    g.append("g")
-        .attr("class", "axisStyle")
-        .attr("transform", "translate(0," + y(0) + ")")
-        .call(d3.axisBottom(x));
+        g.append("g")
+            .attr("class", "axis-style")
+            .call(d3.axisLeft(y));
 
-         // .on("start", function repeat() {
-        //     $('#arrayOfValues').on('change', function() {
-        //         .push(arrayOfValues[0]);
-        //     d3.select(this)
-        //         .attr("d", line)
-        //         .attr("transform", null);
-        //     d3.active(this)
-        //         .attr("transform", "translate(" + x(-1) + ",0)")
-        //     .transition()
-        //         .on("start", repeat);
-        //         data.shift();
-        //     })
-        // });
+        var xAxis = g.append("g")
+            .attr("class", "axis-style")
+            .attr("transform", "translate(0," + y(0) + ")")
+            .call(d3.axisBottom(movingAxis));
 
     </script>
 

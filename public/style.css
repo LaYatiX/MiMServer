@@ -13,6 +13,36 @@ body {
   user-select: none;
 }
 
+#horizontal-line {
+  stroke-linecap: round;
+  stroke-width: 0.8;
+  stroke: #333;
+}
+
+#data-message {
+  opacity: 0;
+  fill: #c4c4c4;
+  font-size: 1.9em;
+}
+
+#data-message.active {
+  animation: pulsate 2500ms ease-out;
+  animation-iteration-count: infinite; 
+  animation-play-state: running;
+}
+
+@keyframes pulsate {
+  0% { 
+      opacity: 0;
+  }
+  50% { 
+      opacity: 1.0;
+  }
+  100% { 
+      opacity: 0;
+  }
+}
+
 .footer {
   position: relative;
   margin: 4em 0 0 0;
@@ -126,7 +156,6 @@ body {
 .line3 {
   fill: none;
   stroke: rgb(143, 18, 18);
-  /* stroke: rgb(109, 21, 21); */
   stroke-width: 4.25;
 }
 
@@ -288,7 +317,6 @@ body {
     min-width: 46em;
     transform-origin: center;
     transform: translate(-50%, -50%);
-    vertical-align: middle;
   }
 
   #v1-box {
