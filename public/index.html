@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Analyser - M&amp;M</title>
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, user-scalable=1" />
+    <title>Analyser | M&amp;M</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script src="jquery-3.2.1.min.js"></script>
     <script src="d3.v4.min.js"></script>
@@ -12,6 +13,32 @@
 </head>
 
 <body onload="init()">
+
+    <div class="modal" id="modal-info">
+        <div class="modal-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="button-close">
+                <g>
+                    <circle cx="12" cy="12" r="11" id="button-close-background" />
+                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.151 17.943l-4.143-4.102-4.117 4.159-1.833-1.833 4.104-4.157-4.162-4.119 1.833-1.833 4.155 4.102 4.106-4.16 1.849 1.849-4.1 4.141 4.157 4.104-1.849 1.849z"
+                    />
+                </g>
+            </svg>
+            <div class="modal-header">
+                <h3>Three-Phase Electric Power Analyser (Internet of Things)</h3>
+            </div>
+            <div class="modal-body">
+                <p id="subject-info">Microprocessors and Microcontrollers</p>
+                <p>In this project we've created a gizmo which can gather data from a Three-Phase Electric Power. The input
+                    is then displayed in a form of the graphs (linear chart shows value of each of the phase's voltage).
+                    A user can then track any occuring interference and set specific elements accordingly in order to compensate
+                    examined device. This can be achieved via switching certain buttons on the page.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <h5>Kamil Nowak | Michal Patyk | Karol Piasnik | Grzegorz Piwosz | Jakub Polczyk</h5>
+            </div>
+        </div>
+    </div>
 
     <div class="grid">
 
@@ -106,10 +133,11 @@
         </div>
 
         <div id="graph-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" id="line-graph">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" id="svg-group">
                 <g>
                     <rect id="outside-line" x="3" y="3" rx="20" ry="20" width="954" height="494"></rect>
-                    <text x="370" y="150" id="data-message">...Gathering Data...</text>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" id="line-graph"></svg>
+                    <text x="490" y="160" text-anchor="middle" alignment-baseline="central" id="data-message">...Gathering Data...</text>
                 </g>
             </svg>
         </div>
@@ -139,6 +167,11 @@
 
     </div>
 
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="info-icon">
+        <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-.001 5.75c.69 0 1.251.56 1.251 1.25s-.561 1.25-1.251 1.25-1.249-.56-1.249-1.25.559-1.25 1.249-1.25zm2.001 12.25h-4v-1c.484-.179 1-.201 1-.735v-4.467c0-.534-.516-.618-1-.797v-1h3v6.265c0 .535.517.558 1 .735v.999z"
+        />
+    </svg>
+
     <script>
 
         var tick = 0;
@@ -147,11 +180,21 @@
         var parametersData = [];
         var idleData = [];
         var currentData = [];
+        var isFirstMessageReceived = false;
         var isBeingDisplayed = false;
+        var isBeingTransitioned = false;
         var boxIdentifier = ["v1-box", "c1-box", "v2-box", "c2-box", "v3-box", "c3-box"];
+        
         window.WebSocket = window.WebSocket || window.MozWebSocket;
         var dataConnection = new WebSocket("ws://pkprojectserver.hopto.org:1337");
         var relaysConnection = new WebSocket("ws://pkprojectserver.hopto.org:1338");
+
+        var modal = document.getElementById('modal-info');
+        var modalButton = document.getElementById('info-icon');
+        var closeButton = document.getElementsByClassName('button-close')[0];
+        modalButton.addEventListener('click', openModal);
+        closeButton.addEventListener('click', closeModal);
+        window.addEventListener('click', outsideClick);
 
         for (let sentinel = 0; sentinel < arraySize; ++sentinel) {
             idleData[sentinel] = [];
@@ -167,18 +210,49 @@
             getData();
         }
 
+        function unhideGraph() {
+            $('#line-graph').addClass('active');
+        }
+
         function startAnimation() {
             $('#data-message').addClass('active');
+            $('.progress').each(
+                function () {
+                    $(this).addClass('active');
+                }
+            );
         }
 
         function stopAnimation() {
             $('#data-message').on('animationiteration webkitAnimationIteration', function () {
                 var $this = $(this);
-
                 $this.removeClass('active');
-
                 $this.off();
             });
+            $('.progress').each(
+                function () {
+                    var $this = $(this).on('animationiteration webkitAnimationIteration', function () {
+                        $this.removeClass('active');
+                        $this.off();
+                    });
+                }
+            );
+
+            unhideGraph();
+        }
+
+        function openModal() {
+            $('.modal').addClass('active');
+        }
+
+        function closeModal() {
+            $('.modal').removeClass('active');
+        }
+
+        function outsideClick(e) {
+            if (e.target == modal) {
+                $('.modal').removeClass('active');
+            }
         }
 
         function idleToCurrent() {
@@ -211,17 +285,18 @@
             );
         }
 
-        function myEndFunction() {
-            document.getElementById("data-message").style.color = "red";
-        }
-
         function getData() {
             dataConnection.onopen = function () {
                 console.log('Main WebSocket Status: OPEN');
             }
 
             dataConnection.onmessage = function (message) {
-                stopAnimation();
+                if (!isFirstMessageReceived) {
+                    stopAnimation();
+                    startTransition();
+
+                    isFirstMessageReceived = true;
+                }
 
                 if (!isBeingDisplayed) {
                     idleData = message.data.split("|");
@@ -233,11 +308,17 @@
                     displayCurrentData();
                 }
             }
+        }
 
-            setInterval(function () {
-                shiftAxis(tick);
-                ++tick;
-            }, duration);
+        function startTransition() {
+            if (!isBeingTransitioned) {
+                isBeingTransitioned = true;
+
+                setInterval(function () {
+                    shiftAxis(tick);
+                    ++tick;
+                }, duration);
+            }
         }
 
         function getRelaysStatus() {
@@ -276,7 +357,6 @@
 
             $('.button-relay:not(:first)').each(
                 function (index) {
-                    console.log(index);
                     if ($(this).attr('isPressed') == "true") {
                         relaysStatus += "1";
                     }
@@ -295,7 +375,20 @@
             xAxis.transition()
                 .duration(duration)
                 .ease(d3.easeLinear)
-                .call(d3.axisBottom(movingAxis));
+                .call(d3.axisBottom(movingAxis).tickFormat(function (index) {
+                    if (index < 0) {
+                        return '';
+                    }
+                    else {
+                        return index;
+                    }
+                }));
+
+            xAxis.selectAll(".tick")
+                .filter(function (index) {
+                    return index < 0;
+                })
+                .remove();
         }
 
         function displayCurrentData() {
@@ -327,6 +420,8 @@
         function generateData() {
             var amplitude = 250,
                 angularFrequency = 0.32;
+
+            stopAnimation();
 
             setInterval(function () {
                 function setVoltage(value, phase = 0) {
@@ -403,7 +498,7 @@
         data3.fill('0');
 
         var svg = d3.select("#line-graph"),
-            margin = { top: 28, right: 25, bottom: 28, left: 60 },
+            margin = { top: 29, right: 26, bottom: 29, left: 60 },
             viewBox = svg.attr("viewBox").split(" "),
             size = viewBox.slice(2),
             width = size[0] - margin.left - margin.right,
@@ -436,17 +531,17 @@
         g.append("g")
             .attr("clip-path", "url(#clip)")
             .append("path")
-            .datum(data1)
-            .attr("class", "line1")
+            .datum(data3)
+            .attr("class", "line-3")
             .transition()
             .duration(duration)
             .ease(d3.easeLinear)
             .on("start", function repeat() {
-                if (parametersData[0] != undefined) {
-                    data1.push(parametersData[0]);
+                if (parametersData[4] != undefined) {
+                    data3.push(parametersData[4]);
                 }
                 else {
-                    data1.push(data1[field - 1]);
+                    data3.push(data3[field - 1]);
                 }
                 d3.select(this)
                     .attr("d", line)
@@ -455,14 +550,14 @@
                     .attr("transform", "translate(" + x(-1) + ",0)")
                     .transition()
                     .on("start", repeat);
-                data1.shift();
+                data3.shift();
             });
 
         g.append("g")
             .attr("clip-path", "url(#clip)")
             .append("path")
             .datum(data2)
-            .attr("class", "line2")
+            .attr("class", "line-2")
             .transition()
             .duration(duration)
             .ease(d3.easeLinear)
@@ -486,17 +581,17 @@
         g.append("g")
             .attr("clip-path", "url(#clip)")
             .append("path")
-            .datum(data3)
-            .attr("class", "line3")
+            .datum(data1)
+            .attr("class", "line-1")
             .transition()
             .duration(duration)
             .ease(d3.easeLinear)
             .on("start", function repeat() {
-                if (parametersData[4] != undefined) {
-                    data3.push(parametersData[4]);
+                if (parametersData[0] != undefined) {
+                    data1.push(parametersData[0]);
                 }
                 else {
-                    data3.push(data3[field - 1]);
+                    data1.push(data1[field - 1]);
                 }
                 d3.select(this)
                     .attr("d", line)
@@ -505,17 +600,27 @@
                     .attr("transform", "translate(" + x(-1) + ",0)")
                     .transition()
                     .on("start", repeat);
-                data3.shift();
+                data1.shift();
             });
 
         g.append("g")
-            .attr("class", "axis-style")
+            .attr("class", "y-axis-style")
             .call(d3.axisLeft(y));
 
         var xAxis = g.append("g")
-            .attr("class", "axis-style")
+            .attr("class", "x-axis-style")
             .attr("transform", "translate(0," + y(0) + ")")
-            .call(d3.axisBottom(movingAxis));
+            .call(d3.axisBottom(movingAxis).tickFormat(function (index) {
+                if (index <= 0) {
+                    return '';
+                }
+            }));
+
+        xAxis.selectAll(".tick")
+            .filter(function (index) {
+                return index <= 0;
+            })
+            .remove();
 
     </script>
 

@@ -2,7 +2,15 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow: auto;
+  min-height: 100%;
+  margin: 0;
+}
+
 body {
+  width: 100%;
+  height: 100%;
   font-family: 'Lato', 'Open Sans', sans-serif;
   text-align: center;
   background: #212121;
@@ -13,6 +21,128 @@ body {
   user-select: none;
 }
 
+#info-icon {
+  position: fixed;
+  right: 1.5em;
+  bottom: 1.5em;
+  right: calc(0.4em + 0.78vw);
+  bottom: calc(0.4em + 0.78vw);
+  fill: #333;
+  transform: scale(1.4);
+  z-index: 1;
+  transition: all 120ms cubic-bezier(0,0,0,1);
+}
+
+#info-icon:hover {
+  fill: #c4c4c4;
+}
+
+/* Modal Styling */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: -1;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.42);
+  -webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+  user-select: text;
+  animation: to-visible 200ms cubic-bezier(0,0,0,1);
+}
+
+.modal.active {
+  display: block;
+  z-index: 1;
+  opacity: 1;
+}
+
+.modal-content {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+  margin-top: 10%;
+  margin-top: 20vh;
+  width: 60%;
+  width: 60vw;
+  border: 0.2em solid rgb(28, 55, 151);
+  border-radius: 1em;
+  background: #212121;
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.45);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.45);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.45);
+  text-justify: inter-word;
+}
+
+.modal-content h3 {
+  margin: 0;
+}
+
+.modal-header {
+  padding: 1em;
+  padding-top: 1.6em;
+}
+
+.modal-body {
+  text-align: justify;
+  padding: 0 10em;
+  padding-left: calc(0.72em + 8.5vw);
+  padding-right: calc(0.72em + 8.5vw);
+}
+
+#subject-info {
+  text-align: center;
+  font-size: 1.1em;
+  font-style: italic;
+}
+
+.modal-footer h5 {
+  margin: 0;
+  font-size: 0.9em;
+  font-weight: 300;
+}
+
+.modal-footer {
+  padding: 1.5em;
+  padding-bottom: 1em;
+}
+
+.button-close {
+  position: absolute;
+  margin-top: -0.6em;
+  margin-right: -0.6em;
+  top: 0;
+  right: 0;
+  fill: #c4c4c4;
+  transform: scale(1.1);
+  transition: all 120ms cubic-bezier(0,0,0,.88);
+}
+
+.button-close:hover {
+  transform: scale(1.28);
+}
+
+#button-close-background {
+  fill: #212121;
+}
+
+@keyframes to-visible {
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+}
+
+/* End of Modal Styling */
+
 #horizontal-line {
   stroke-linecap: round;
   stroke-width: 0.8;
@@ -22,44 +152,58 @@ body {
 #data-message {
   opacity: 0;
   fill: #c4c4c4;
-  font-size: 1.9em;
+  font-weight: 500;
+  font-size: 2.6em;
 }
 
 #data-message.active {
-  animation: pulsate 2500ms ease-out;
+  animation: pulsate-to-visible 2500ms ease-out;
   animation-iteration-count: infinite; 
   animation-play-state: running;
 }
 
-@keyframes pulsate {
+@keyframes pulsate-to-visible {
   0% { 
-      opacity: 0;
+    opacity: 0;
   }
   50% { 
-      opacity: 1.0;
+    opacity: 1;
   }
   100% { 
-      opacity: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes pulsate-to-hidden {
+  0% { 
+    opacity: 1;
+  }
+  50% { 
+    opacity: 0;
+  }
+  100% { 
+    opacity: 1;
   }
 }
 
 .footer {
   position: relative;
-  margin: 4em 0 0 0;
+  margin: 1em 0 0 0;
 }
 
 #footer-text {
+  margin: 0 0 -1.8em 0;
   padding: 1.4em;
   position: absolute;
   bottom: 0;
   display: block;
   width: 100%;
   color: #333;
-  font-size: 0.8em;
+  font-size: 0.83em;
 }
 
 .container {
-  margin: 0 0 0.2em 0;
+  margin: 0;
 }
 
 .rounded-bar {
@@ -78,40 +222,30 @@ body {
 }
 
 .progress {
+  opacity: 1;
   stroke-width: 7.3;
   stroke: rgb(50, 73, 160);
-  stroke-dashoffset: 125;
+  stroke-dashoffset: 0;
   transition: stroke-dashoffset 250ms linear;
 }
 
-#v1 > .progress {
+.progress.active {
+  animation: pulsate-to-hidden 2500ms ease-out;
+  animation-delay: 1250ms;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
+#v1 > .progress, #c1 > .progress {
   stroke: rgb(28, 55, 151);
-  stroke-dashoffset: 40;
 }
 
-#v2 > .progress {
+#v2 > .progress, #c2 > .progress {
   stroke: rgb(16, 141, 16);
-  stroke-dashoffset: 120;
 }
 
-#v3 > .progress {
+#v3 > .progress, #c3 > .progress {
   stroke: rgb(143, 18, 18);
-  stroke-dashoffset: 80;
-}
-
-#c1 > .progress {
-  stroke: rgb(28, 55, 151);
-  stroke-dashoffset: 140;
-}
-
-#c2 > .progress {
-  stroke: rgb(16, 141, 16);
-  stroke-dashoffset: 200;
-}
-
-#c3 > .progress {
-  stroke: rgb(143, 18, 18);
-  stroke-dashoffset: 160;
 }
 
 .bar-text {
@@ -135,43 +269,60 @@ body {
 
 /* Graph Styling */
 
+#line-graph {
+  opacity: 0;
+  transition: opacity 3000ms ease-in-out;
+}
+
+#line-graph.active {
+  opacity: 1;
+}
+
 #outside-line {
   fill: #212121;
   stroke: #333;
   stroke-width: 5;
 }
 
-.line1 {
+[class^="line"] {
+  opacity: 1;
   fill: none;
+  stroke-width: 4.5;
+  transition: opacity 3000ms cubic-bezier(.77,.1,.75,.89);
+}
+
+.line-1 {
   stroke: rgb(28, 55, 151);
-  stroke-width: 4.25;
 }
 
-.line2 {
-  fill: none;
+.line-2 {
   stroke: rgb(16, 141, 16);
-  stroke-width: 4.25;
 }
 
-.line3 {
-  fill: none;
+.line-3 {
   stroke: rgb(143, 18, 18);
-  stroke-width: 4.25;
 }
 
-.axis-style line{
+.x-axis-style line, .y-axis-style line {
   stroke:#c4c4c4;
-  stroke-width: 1.8;
 }
 
-.axis-style path{
+.x-axis-style line {
+  stroke-width: 4;
+}
+
+.y-axis-style line{
+  stroke-width: 2.5;
+}
+
+.x-axis-style path ,.y-axis-style path {
   stroke:#c4c4c4;
-  stroke-width: 1.6;
+  stroke-width: 2.15;
 }
 
-.axis-style text{
+.x-axis-style text, .y-axis-style text {
   fill:#c4c4c4;
-  font-size: 1.45em;
+  font-size: 1.5em;
   font-family: 'Lato', 'Open-Sans', sans-serif;
 }
 
@@ -211,7 +362,7 @@ body {
 }
 
 .button-relay:nth-last-child(1) {
-  margin: 3.2% auto 2.7% auto;
+  margin: 3.2% auto 2.9% auto;
 }
 
 .button-relay:hover {
@@ -242,7 +393,7 @@ body {
     left: 50%;
     top: 50%;
     width: 80%;
-    height: 90%;
+    height: 100%;
     min-width: 20em;
     transform-origin: center;
     transform: translate(-50%, -50%);
@@ -283,13 +434,15 @@ body {
   }
 
   .footer {
-    grid-row-start: 1;
-    grid-row-end: 2;
+    margin: 4em 0 -1.7em 0;
+    grid-row-start: 5;
+    grid-row-end: 6;
     grid-column-start: 1;
     grid-column-end: 8;
   }
-
+  
   #footer-text {
+    margin: 0 0 0 0;
     font-size: 1.6vw;
   }
 }
@@ -297,6 +450,7 @@ body {
 @media screen and (min-width: 736px)
 {
   .grid {
+    padding: 1.5em 0 1.5em 0;
     display: -ms-grid-;
     display: grid;
     grid-template-columns: 10% repeat(5, 2fr) 10%;
@@ -356,6 +510,7 @@ body {
     grid-row-end: 6;
     grid-column-start: 1;
     grid-column-end: 8;
+    padding-top: 1.5em;
   }
 
   .button-relay {
