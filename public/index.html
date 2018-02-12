@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, user-scalable=1" />
-    <title>Analyser | M&amp;M</title>
+    <title>Three-Phase Electric Power Analyser | Internet of Things</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script src="jquery-3.2.1.min.js"></script>
     <script src="d3.v4.min.js"></script>
@@ -15,7 +15,9 @@
 <body onload="init()">
 
     <div class="modal" id="modal-info">
+
         <div class="modal-content">
+
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="button-close">
                 <g>
                     <circle cx="12" cy="12" r="11" id="button-close-background" />
@@ -23,9 +25,11 @@
                     />
                 </g>
             </svg>
+
             <div class="modal-header">
-                <h3>Three-Phase Electric Power Analyser (Internet of Things)</h3>
+                <h3>Three-Phase Electric Power Analyser - Internet of Things</h3>
             </div>
+
             <div class="modal-body">
                 <p id="subject-info">Microprocessors and Microcontrollers</p>
                 <p>In this project we've created a gizmo which can gather data from a Three-Phase Electric Power. The input
@@ -34,10 +38,13 @@
                     examined device. This can be achieved via switching certain buttons on the page.
                 </p>
             </div>
+
             <div class="modal-footer">
                 <h5>Kamil Nowak | Michal Patyk | Karol Piasnik | Grzegorz Piwosz | Jakub Polczyk</h5>
             </div>
+
         </div>
+
     </div>
 
     <div class="grid">
@@ -184,7 +191,7 @@
         var isBeingDisplayed = false;
         var isBeingTransitioned = false;
         var boxIdentifier = ["v1-box", "c1-box", "v2-box", "c2-box", "v3-box", "c3-box"];
-        
+
         window.WebSocket = window.WebSocket || window.MozWebSocket;
         var dataConnection = new WebSocket("ws://pkprojectserver.hopto.org:1337");
         var relaysConnection = new WebSocket("ws://pkprojectserver.hopto.org:1338");
@@ -192,7 +199,7 @@
         var modal = document.getElementById('modal-info');
         var modalButton = document.getElementById('info-icon');
         var closeButton = document.getElementsByClassName('button-close')[0];
-        modalButton.addEventListener('click', openModal);
+        modalButton.addEventListener('click', toggleModal);
         closeButton.addEventListener('click', closeModal);
         window.addEventListener('click', outsideClick);
 
@@ -241,17 +248,32 @@
             unhideGraph();
         }
 
-        function openModal() {
-            $('.modal').addClass('active');
+        function hideModal() {
+            $('.modal').css('opacity', '0');
+
+            $('.modal').on('transitionend webkitTransitionEnd oTransitionEnd', function () {
+                if ($('.modal').css('opacity') == '0') {
+                    $('.modal').css('z-index', '-1');
+                }
+            });
+        }
+
+        function toggleModal() {
+            if ($('.modal').css('opacity') == '1') {
+                hideModal();
+            }
+            else {
+                $('.modal').css({ 'z-index': '1', 'opacity': '1' });
+            }
         }
 
         function closeModal() {
-            $('.modal').removeClass('active');
+            hideModal();
         }
 
-        function outsideClick(e) {
-            if (e.target == modal) {
-                $('.modal').removeClass('active');
+        function outsideClick(mouseClick) {
+            if (mouseClick.target == modal) {
+                hideModal();
             }
         }
 
@@ -375,6 +397,7 @@
             xAxis.transition()
                 .duration(duration)
                 .ease(d3.easeLinear)
+                // remove xAxis's negative labels for negative values
                 .call(d3.axisBottom(movingAxis).tickFormat(function (index) {
                     if (index < 0) {
                         return '';
@@ -384,6 +407,7 @@
                     }
                 }));
 
+            // do not display negative tick marks
             xAxis.selectAll(".tick")
                 .filter(function (index) {
                     return index < 0;
@@ -402,13 +426,16 @@
                 }
 
                 if (typeof currentData[sentinel] !== 'undefined' && typeof currentData[sentinel][0] !== 'undefined') {
-                    parametersData[0] = currentData[sentinel][0];
-                    parametersData[2] = currentData[sentinel][2];
-                    parametersData[4] = currentData[sentinel][4];
+                    for (let secondSentinel = 0; secondSentinel < numOfParameters; secondSentinel = secondSentinel + 2) {
+                        parametersData[secondSentinel] = currentData[sentinel][secondSentinel];
+                    }
+
                     updateContent(currentData[sentinel]);
                 }
                 else {
-                    parametersData[0] = parametersData[2] = parametersData[4] = 0;
+                    for (let secondSentinel = 0; secondSentinel < numOfParameters; secondSentinel = secondSentinel + 2) {
+                        parametersData[secondSentinel] = 0;
+                    }
                 }
 
                 ++sentinel;
@@ -518,8 +545,12 @@
             .range([height, 0]);
 
         var line = d3.line()
-            .x(function (d, i) { return x(i); })
-            .y(function (d, i) { return y(d); });
+            .x(function (d, i) {
+                return x(i);
+            })
+            .y(function (d, i) {
+                return y(d);
+            });
 
         g.append("defs")
             .append("clipPath")
@@ -610,12 +641,14 @@
         var xAxis = g.append("g")
             .attr("class", "x-axis-style")
             .attr("transform", "translate(0," + y(0) + ")")
+            // remove xAxis's labels for non-positive values
             .call(d3.axisBottom(movingAxis).tickFormat(function (index) {
                 if (index <= 0) {
                     return '';
                 }
             }));
 
+        // do not display non-positive tick marks
         xAxis.selectAll(".tick")
             .filter(function (index) {
                 return index <= 0;

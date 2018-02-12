@@ -40,7 +40,7 @@ body {
 /* Modal Styling */
 
 .modal {
-  display: none;
+  display: block;
   position: fixed;
   z-index: -1;
   opacity: 0;
@@ -54,13 +54,7 @@ body {
 	-moz-user-select: text;
 	-ms-user-select: text;
   user-select: text;
-  animation: to-visible 200ms cubic-bezier(0,0,0,1);
-}
-
-.modal.active {
-  display: block;
-  z-index: 1;
-  opacity: 1;
+  transition: opacity 600ms cubic-bezier(0,0,0,1);
 }
 
 .modal-content {
@@ -132,12 +126,12 @@ body {
   fill: #212121;
 }
 
-@keyframes to-visible {
-  from {
-    opacity: 0
+@keyframes to-hidden {
+  from { 
+    opacity: 1;
   }
-  to {
-    opacity: 1
+  to { 
+    opacity: 0;
   }
 }
 
@@ -285,10 +279,8 @@ body {
 }
 
 [class^="line"] {
-  opacity: 1;
   fill: none;
   stroke-width: 4.5;
-  transition: opacity 3000ms cubic-bezier(.77,.1,.75,.89);
 }
 
 .line-1 {
@@ -356,6 +348,7 @@ body {
   font-weight: 300;
   cursor: pointer;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
   transition: all 150ms cubic-bezier(0,.83,.6,1),
     border 220ms cubic-bezier(0,.83,.6,1),
     color 200ms cubic-bezier(0,.83,.6,1);
@@ -369,11 +362,20 @@ body {
   background-color: #1b1b1b;
 }
 
+.button-relay:focus {
+  outline: none;
+}
+
+.button-relay::-moz-focus-inner {
+  border: 0;
+}
+
 .button-relay:active {
   color: #bebebe;
   background-color: #161616;
   border: 0.2em solid #202020;
 }
+
 
 .button-relay[isPressed = "true"] {
   color: rgb(28, 55, 151);
