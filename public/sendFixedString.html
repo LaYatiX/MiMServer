@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+    <meta charset="utf-8">
+    <title>Data Generator (Fixed String)</title>
+    <link rel="shortcut icon" href="icon.png" />
+    <style>
+        * {
+            font-family: 'Lato', 'Open Sans', sans-serif;
+            font-size: 12px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        body {
+            background: #212121;
+            color: #c4c4c4;
+            padding-bottom: 20px;
+        }
+
+        #content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        #content::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        #content::-webkit-scrollbar-thumb {
+            width: 12px;
+            background-color: #555;
+        }
+
+        p {
+            line-height: 18px;
+        }
+
+        div {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        ::-moz-selection {
+            background-color: #333;
+        }
+
+        ::selection {
+            background-color: #333;
+        }
+
+        #content {
+            width: 600px;
+            width: 50vw;
+            max-height: 50vh;
+            padding: 5px;
+            background: #212121;
+            color: #c4c4c4;
+            border-radius: 15px;
+            border: 4px solid #333;
+            overflow-y: scroll;
+            margin-top: 20px;
+            margin-top: 5vh;
+            height: 740px;
+            text-align: center;
+        }
+
+        #input {
+            display: inline-block;
+            background: #212121;
+            border-radius: 10px;
+            border: 4px solid #333;
+            margin-top: 10px;
+            padding: 5px;
+            width: 400px;
+        }
+
+        #input:focus {
+            outline: none;
+        }
+
+        input,
+        textarea {
+            font-size: 1.3em;
+            color: #c4c4c4;
+            text-shadow: 0px 0px 0px #c4c4c4;
+            -webkit-text-fill-color: transparent;
+        }
+
+        input::-webkit-input-placeholder,
+        textarea::-webkit-input-placeholder {
+            color: #ccc;
+            text-shadow: none;
+            -webkit-text-fill-color: initial;
+        }
+
+        #status {
+            font-size: 1.2em;
+            font-weight: 900;
+            color: red;
+            margin-top: 15px;
+            margin-right: 15px;
+            width: 120px;
+            display: inline-block;
+        }
+
+        #outside-wrapper {
+            margin-top: 15px;
+            width: 700px;
+            width: 50vw;
+        }
+
+        #wrapper {
+            text-align: center;
+        }
+
+        button {
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            display: block;
+            margin: 3.2% auto;
+            color: #f0f0f0;
+            background: none;
+            border-radius: 15px;
+            border: 4px solid #333;
+            min-width: 20%;
+            min-height: 15%;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            font-size: 1.9em;
+            cursor: pointer;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            transition: all 150ms cubic-bezier(0, .83, .6, 1),
+            border 220ms cubic-bezier(0, .83, .6, 1),
+            color 200ms cubic-bezier(0, .83, .6, 1);
+        }
+
+        button:active {
+            color: #bebebe;
+            background-color: #161616;
+            border: 0.2em solid #202020;
+        }
+
+        button[isPressed="true"] {
+            color: rgb(28, 55, 151);
+            border: 0.2em solid rgb(25, 27, 136);
+        }
+
+        button[isDisabled="true"] {
+            color: #333;
+            border: 0.2em solid #333;
+        }
+    </style>
+
+</head>
+
+<script>
+
+    var isBeingSent = true;
+
+    var fixedString = "0.000;10.970;-228.236;10.052;-186.278;10.443|20.477;10.978;-219.113;10.924;-199.309;10.082|40.816;10.908;-208.517;10.384;-211.001;10.044|60.882;10.007;-196.520;10.363;-221.274;10.738|80.538;10.720;-183.203;10.108;-230.061;10.282|99.652;9.689;-168.654;9.624;-237.302;10.057|118.097;10.812;-152.972;10.584;-242.947;10.234|135.749;10.244;-136.262;9.630;-246.961;10.354|152.488;9.733;-118.636;9.814;-249.314;10.569|168.202;10.740;-100.212;10.504;-249.992;10.487|182.786;10.863;-81.116;10.475;-248.990;10.347|196.142;10.947;-61.474;10.754;-246.315;9.987|208.180;10.925;-41.419;10.260;-241.985;10.736|218.818;9.989;-21.086;10.481;-236.028;9.717|227.986;10.008;-0.611;10.839;-228.485;9.565|235.622;10.755;19.868;10.264;-219.407;10.720|241.675;9.666;40.214;9.894;-208.854;10.004|246.103;10.496;60.289;9.968;-196.898;9.518|248.878;10.750;79.959;9.880;-183.618;9.527|249.980;9.780;99.092;9.911;-169.104;9.916|249.402;10.076;117.559;9.836;-153.455;10.953|247.148;10.380;135.235;10.349;-136.773;10.833|243.233;10.582;152.003;9.642;-119.173;10.951|237.683;10.830;167.750;10.575;-100.772;10.372|230.537;10.292;182.369;10.083;-81.693;9.997|221.841;9.582;195.763;10.874;-62.066;10.381|211.654;10.465;207.841;10.239;-42.022;10.405|200.045;9.569;218.522;10.577;-21.695;10.069|187.091;10.320;227.735;9.928;-1.222;10.521|172.880;10.180;235.417;10.871;19.259;10.478|157.508;10.687;241.518;9.857;39.610;10.359|141.077;9.915;245.995;10.823;59.696;10.736|123.697;9.859;248.819;10.736;79.380;10.859|105.487;9.727;249.971;9.604;98.530;10.556|86.568;10.189;249.443;10.439;117.019;10.159|67.067;10.201;247.239;10.913;134.721;9.974|47.115;10.963;243.373;9.762;151.518;9.532|26.846;9.961;237.872;10.060;167.296;9.737|6.397;9.688;230.772;10.471;181.951;10.598|-14.094;10.458;222.122;10.801;195.382;10.787|-34.491;10.523;211.978;10.763;207.501;10.495|-54.657;9.522;200.410;10.860;218.225;10.581|-74.455;10.404;187.496;10.610;227.482;9.636|-93.752;9.751;173.321;10.046;235.211;10.156|-112.420;10.825;157.982;10.537;241.359;10.583|-130.332;10.390;141.581;10.443;245.885;9.962|-147.368;9.587;124.228;10.725;248.759;10.384|-163.414;10.952;106.041;9.590;249.961;10.330|-178.362;9.826;87.141;10.336;249.483;9.889|-192.111;10.400;67.655;10.824;247.329;10.473|-204.569;10.982;47.715;10.219;243.512;10.481|-215.653;10.729;27.454;10.765;238.059;9.518|-225.287;10.041;7.008;10.550;231.007;10.649|-233.407;10.928;-13.484;10.561;222.401;9.533|-239.958;10.788;-33.886;10.858;212.302;9.619|-244.897;9.633;-54.060;10.834;200.775;10.168|-248.190;10.453;-73.871;10.208;187.899;10.988|-249.816;10.607;-93.186;9.860;173.761;10.927|-249.762;10.911;-111.874;10.231;158.455;10.704|-248.030;10.395;-129.810;10.233;142.084;9.678|-244.632;10.603;-146.874;10.489;124.758;10.862|-239.589;9.586;-162.951;9.976;106.594;10.632|-232.936;10.539;-177.933;10.554;87.713;10.488|-224.718;10.298;-191.720;10.970;68.243;9.602|-214.989;10.683;-204.217;9.661;48.314;10.638|-203.816;10.264;-215.343;10.815;28.061;10.782|-191.273;10.444;-225.021;10.546;7.619;9.815|-177.445;10.778;-233.187;9.523;-12.874;9.565|-162.424;10.971;-239.786;10.286;-33.281;10.082|-146.312;10.912;-244.774;10.769;-53.464;9.875|-129.216;10.308;-248.116;10.610;-73.287;9.580|-111.252;10.429;-249.792;10.354;-92.618;10.636|-92.541;9.522;-249.788;10.395;-111.327;10.781|-73.208;10.886;-248.106;10.158;-129.288;9.548|-53.382;10.281;-244.757;10.489;-146.380;9.935|-33.198;9.527;-239.763;9.751;-162.488;10.847|-12.791;10.517;-233.157;10.567;-177.504;9.854|7.702;9.599;-224.985;10.666;-191.327;9.698|28.144;9.781;-215.300;10.641;-203.864;9.556|48.396;9.982;-204.169;10.261;-215.032;10.112|68.323;10.849;-191.666;9.965;-224.754;10.478|87.791;9.993;-177.875;10.236;-232.966;9.602|106.669;10.142;-162.888;9.647;-239.613;10.856|124.830;10.935;-146.807;9.585;-244.649;9.985|142.152;9.817;-129.739;9.765;-248.041;10.099|158.519;9.627;-111.799;10.081;-249.766;10.954|173.821;10.253;-93.108;9.546;-249.813;10.694|187.954;9.542;-73.792;10.507;-248.180;10.351|200.825;10.569;-53.979;9.662;-244.880;9.716|212.346;10.069;-33.803;10.100;-239.935;10.124|222.439;10.511;-13.401;10.575;-233.377;9.829|231.038;9.643;7.092;10.468;-225.250;10.603|238.085;9.970;27.537;10.662;-215.610;10.959|243.531;9.942;47.797;9.637;-204.521;10.264|247.341;10.173;67.735;9.725;-192.058;10.083|249.488;9.717;87.219;10.644;-178.304;10.642|249.959;9.905;106.116;9.923;-163.351;9.816|248.751;9.878;124.300;10.714;-147.301;10.036|245.870;9.699;141.649;10.787;-130.261;10.856|241.337;10.292;158.046;10.611;-112.346;10.15";
+
+    function toggleSpam() {
+        if (!isBeingSent) {
+            clearInterval(sender);
+        }
+        else {
+            sender = setInterval(function () {
+                connection.send(fixedString);
+                document.getElementById("content").scrollTop = document.getElementById("content").scrollHeight;
+            }, 10000)
+        }
+
+        isBeingSent = !isBeingSent;
+    }
+
+    function changeState(button) {
+            if (button.getAttribute("isDisabled") == "false") {
+                if (button.getAttribute("isPressed") == "false") {
+                    button.setAttribute("isPressed", "true");
+                }
+                else {
+                    button.setAttribute("isPressed", "false");
+                }
+            }
+        }
+
+</script>
+
+<body onload="toggleSpam()">
+
+    <div id="content"></div>
+
+    <div id="outside-wrapper">
+        <div id="wrapper">
+            <span id="status">DISCONNECTED</span>
+            <input spellcheck="false" type="text" id="input">
+        </div>
+    </div>
+
+    <button isPressed="false" isDisabled="false" onclick="changeState(this); toggleSpam()">Start/Stop</button>
+
+    <script>
+        window.WebSocket = window.WebSocket || window.MozWebSocket;
+        var connection = new WebSocket("ws://pkprojectserver.hopto.org:1337");
+
+        connection.onopen = function () {
+            console.log('open');
+            document.getElementById('status').innerHTML = "CONNECTED";
+            document.getElementById('status').style.color = "green";
+        }
+
+        var input = document.getElementById("input");
+
+        input.onkeydown = function (input) {
+            if (input.keyCode == 13) {
+                var msg = input.value;
+                if (!msg) return;
+                connection.send(msg);
+                input.value = "";
+            }
+        }
+
+        var content = document.getElementById("content");
+
+        connection.onmessage = function (msg) {
+            var p = document.createElement("p");
+            p.appendChild(document.createTextNode(msg.data));
+            content.appendChild(p);
+        }
+
+    </script>
+
+</body>
+
+</html>
