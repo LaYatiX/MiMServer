@@ -390,7 +390,8 @@ body {
 @media screen and (max-width: 735px)
 {
   .grid {
-    margin: 0 auto;
+    margin: 0 auto 0 auto;
+    padding-top: 6%;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -436,16 +437,12 @@ body {
   }
 
   .footer {
-    margin: 4em 0 -1.7em 0;
-    grid-row-start: 5;
-    grid-row-end: 6;
-    grid-column-start: 1;
-    grid-column-end: 8;
+    height: 2em;
   }
   
   #footer-text {
     margin: 0 0 0 0;
-    font-size: 1.6vw;
+    font-size: calc(0.55em + 0.55vw);
   }
 }
 
@@ -476,31 +473,31 @@ body {
   }
 
   #v1-box {
-    grid-area: v1
+    grid-area: v1;
   }
 
   #v2-box {
-    grid-area: v2
+    grid-area: v2;
   }
 
   #v3-box {
-    grid-area: v3
+    grid-area: v3;
   }
 
   #c1-box {
-    grid-area: c1
+    grid-area: c1;
   }
 
   #c2-box {
-    grid-area: c2
+    grid-area: c2;
   }
 
   #c3-box {
-    grid-area: c3
+    grid-area: c3;
   }
 
   #graph-container {
-    grid-area: chart
+    grid-area: chart;
   }
 
   #controller {
